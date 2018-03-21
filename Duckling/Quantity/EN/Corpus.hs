@@ -91,4 +91,8 @@ allExamples = concat
               , "over four ounces of chocolate"
               , "more than four ounces of chocolate"
               ]
+  , examples (simple Giga 2 Nothing)
+             [ "2 giga"
+             , "two giga"
+             ]
   ]

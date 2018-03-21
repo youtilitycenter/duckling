@@ -16,6 +16,7 @@ import Test.Tasty
 
 import qualified Duckling.Quantity.AR.Tests as AR
 import qualified Duckling.Quantity.EN.Tests as EN
+import qualified Duckling.Quantity.IT.Tests as IT
 import qualified Duckling.Quantity.FR.Tests as FR
 import qualified Duckling.Quantity.HR.Tests as HR
 import qualified Duckling.Quantity.KO.Tests as KO
@@ -27,6 +28,7 @@ tests :: TestTree
 tests = testGroup "Quantity Tests"
   [ AR.tests
   , EN.tests
+  , IT.tests
   , FR.tests
   , HR.tests
   , KO.tests

@@ -17,7 +17,9 @@ allDimensions =
   [ This Duration
   , This Numeral
   , This Ordinal
+  , This Quantity
   , This Temperature
   , This Time
   , This Volume
+  , This Dictionary
   ]

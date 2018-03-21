@@ -20,8 +20,10 @@ import Duckling.Locale
 import Duckling.Types
 import qualified Duckling.Duration.IT.Rules as Duration
 import qualified Duckling.Email.IT.Rules as Email
+import qualified Duckling.Dictionary.IT.Rules as Dictionary
 import qualified Duckling.Numeral.IT.Rules as Numeral
 import qualified Duckling.Ordinal.IT.Rules as Ordinal
+import qualified Duckling.Quantity.IT.Rules as Quantity
 import qualified Duckling.Temperature.IT.Rules as Temperature
 import qualified Duckling.Time.IT.Rules as Time
 import qualified Duckling.TimeGrain.IT.Rules as TimeGrain
@@ -38,10 +40,11 @@ langRules (This AmountOfMoney) = []
 langRules (This Distance) = []
 langRules (This Duration) = Duration.rules
 langRules (This Email) = Email.rules
+langRules (This Dictionary) = Dictionary.rules
 langRules (This Numeral) = Numeral.rules
 langRules (This Ordinal) = Ordinal.rules
 langRules (This PhoneNumber) = []
-langRules (This Quantity) = []
+langRules (This Quantity) = Quantity.rules
 langRules (This RegexMatch) = []
 langRules (This Temperature) = Temperature.rules
 langRules (This Time) = Time.rules

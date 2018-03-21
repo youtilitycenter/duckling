@@ -70,6 +70,7 @@ dependents (This Distance) = HashSet.singleton (This Numeral)
 dependents (This Duration) = HashSet.fromList [This Numeral, This TimeGrain]
 dependents (This Numeral) = HashSet.empty
 dependents (This Email) = HashSet.empty
+dependents (This Dictionary) = HashSet.empty
 dependents (This AmountOfMoney) = HashSet.singleton (This Numeral)
 dependents (This Ordinal) = HashSet.singleton (This Numeral)
 dependents (This PhoneNumber) = HashSet.empty

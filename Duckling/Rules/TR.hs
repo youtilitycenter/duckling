@@ -37,6 +37,7 @@ langRules (This AmountOfMoney) = []
 langRules (This Distance) = Distance.rules
 langRules (This Duration) = Duration.rules
 langRules (This Email) = []
+langRules (This Dictionary) = []
 langRules (This Numeral) = Numeral.rules
 langRules (This Ordinal) = Ordinal.rules
 langRules (This PhoneNumber) = []

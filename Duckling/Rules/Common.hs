@@ -30,6 +30,7 @@ rules (This AmountOfMoney) = AmountOfMoney.rules
 rules (This Distance) = Distance.rules
 rules (This Duration) = Duration.rules
 rules (This Email) = Email.rules
+rules (This Dictionary) = []
 rules (This Numeral) = Numeral.rules
 rules (This Ordinal) = []
 rules (This PhoneNumber) = PhoneNumber.rules

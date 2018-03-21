@@ -39,6 +39,7 @@ import Duckling.AmountOfMoney.Types (AmountOfMoneyData)
 import Duckling.Distance.Types (DistanceData)
 import Duckling.Duration.Types (DurationData)
 import Duckling.Email.Types (EmailData)
+import Duckling.Dictionary.Types (DictionaryData)
 import Duckling.Numeral.Types (NumeralData)
 import Duckling.Ordinal.Types (OrdinalData)
 import Duckling.PhoneNumber.Types (PhoneNumberData)
@@ -62,6 +63,7 @@ data Dimension a where
   Distance :: Dimension DistanceData
   Duration :: Dimension DurationData
   Email :: Dimension EmailData
+  Dictionary :: Dimension DictionaryData
   Numeral :: Dimension NumeralData
   Ordinal :: Dimension OrdinalData
   PhoneNumber :: Dimension PhoneNumberData
@@ -78,6 +80,7 @@ instance Show (Dimension a) where
   show Distance = "Distance"
   show Duration = "Duration"
   show Email = "Email"
+  show Dictionary = "Dictionary"
   show AmountOfMoney = "AmountOfMoney"
   show Numeral = "Numeral"
   show Ordinal = "Ordinal"
@@ -114,6 +117,7 @@ instance Hashable (Dimension a) where
   hashWithSalt s TimeGrain   = hashWithSalt s (11::Int)
   hashWithSalt s Url         = hashWithSalt s (12::Int)
   hashWithSalt s Volume      = hashWithSalt s (13::Int)
+  hashWithSalt s Dictionary  = hashWithSalt s (14::Int)
 
 
 toName :: Dimension a -> Text
@@ -121,6 +125,7 @@ toName RegexMatch = "regex"
 toName Distance = "distance"
 toName Duration = "duration"
 toName Email = "email"
+toName Dictionary = "dictionary"
 toName AmountOfMoney = "amount-of-money"
 toName Numeral = "number"
 toName Ordinal = "ordinal"
@@ -140,6 +145,7 @@ fromName name = HashMap.lookup name m
       , ("distance", This Distance)
       , ("duration", This Duration)
       , ("email", This Email)
+      , ("dictionary", This Dictionary)
       , ("number", This Numeral)
       , ("ordinal", This Ordinal)
       , ("phone-number", This PhoneNumber)
@@ -159,6 +165,8 @@ instance GEq Dimension where
   geq Duration _ = Nothing
   geq Email Email = Just Refl
   geq Email _ = Nothing
+  geq Dictionary Dictionary = Just Refl
+  geq Dictionary _ = Nothing
   geq AmountOfMoney AmountOfMoney = Just Refl
   geq AmountOfMoney _ = Nothing
   geq Numeral Numeral = Just Refl

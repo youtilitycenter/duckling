@@ -37,6 +37,7 @@ data Unit
   | Tablespoon
   | Teaspoon
   | Unnamed
+  | Giga
   deriving (Eq, Generic, Hashable, Ord, Show, NFData)
 
 instance ToJSON Unit where
