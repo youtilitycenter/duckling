@@ -1,13 +1,15 @@
 from bs4 import BeautifulSoup
 import urllib2
 
-lettera = "b"
+lettera = "z"
 
 with open("./_IT/" + lettera + ".txt") as f:
     for line in f:
-        if "VERB" in line:
+        if "( VERB" in line:
             verbo = line.split("(")[0].strip()
             #verbo = "handicappi"
+
+            print(verbo)
             contents = urllib2.urlopen("https://www.i-verbi.it/_xhr_AVmis.php?rawText=" + verbo).read()
             soup = BeautifulSoup(contents, 'html.parser')
             lemma = soup.find_all('strong')
@@ -45,4 +47,4 @@ with open("./_IT/" + lettera + ".txt") as f:
             if _lemma != "":
                 with open("./IT/" + lettera + ".txt", "a") as f:
                     # , ("avere", "(hai)", "presente", "indicativo", "2a singolare")
-                    f.write("\n, (\"" + _lemma + "\", \"(" + verbo + ")\", \"" + '#'.join(_tempo) + "\", \"" + '#'.join(_modo) + "\", \"" + '#'.join(_persona) + "\")")
+                    f.write("\n, (\"" + _lemma + "\", \"(" + verbo + ")\", \"" + '#'.join(_tempo) + "\", \"" + '#'.join(_modo) + "\", \"" + '#'.join(_persona) + "\", \"" + '#'.join(_diatesi) + "\")")
