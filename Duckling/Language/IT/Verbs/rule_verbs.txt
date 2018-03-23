@@ -1,0 +1,40 @@
+Regole:
+
+{desinenza}{special}re
+
+
+IMPERATIVO PRESENTE ?
+
+Futuro
+
+1a singolare = {desinenza}{e}rò
+2a singolare = {desinenza}{e}rai
+3a singolare = {desinenza}{e}rà
+1a plurale = {desinenza}{e}remo
+2a plurale = {desinenza}{e}rete
+3a plurale = {desinenza}{e}ranno
+
+Passato Remoto
+
+1a singolare = {desinenza}{a}ai
+2a singolare = {desinenza}{a}sti
+3a singolare = {desinenza}{ò}
+1a plurale = {desinenza}{a}mmo
+2a plurale = {desinenza}{a}ste
+3a plurale = {desinenza}{a}rono
+
+Participio Passato
+
+singolare maschile = {desinenza}{a}to
+singolare femminile = {desinenza}{a}ta
+plurale maschile = {desinenza}{a}ti
+plurale femminile = {desinenza}{a}te
+
+Presente
+
+1a singolare = {desinenza}{o}
+2a singolare = {desinenza}{i}
+3a singolare = {desinenza}{a}
+1a plurale = {desinenza}{i}amo
+2a plurale = {desinenza}{a}te
+3a plurale = {desinenza}{a}no
