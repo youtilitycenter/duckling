@@ -12,7 +12,7 @@
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE TypeFamilies #-}
 
-module Duckling.Dictionary.Types where
+module Duckling.Dictionary.Verb.Types where
 
 import Control.DeepSeq
 import Data.Aeson
@@ -24,45 +24,41 @@ import Duckling.Resolve (Resolve(..))
 import qualified Data.HashMap.Strict as H
 import qualified Data.Text as Text
 
-data DictionaryData = DictionaryData
+data VerbData = VerbData
   { verb :: Maybe Text
   , form :: Maybe Text
-  , mode :: Maybe Text
   , person :: Maybe Text
   } deriving (Eq, Generic, Hashable, Ord, Show, NFData)
 
-instance Resolve DictionaryData where
-  type ResolvedValue DictionaryData = DictionaryValue
+instance Resolve VerbData where
+  type ResolvedValue VerbData = VerbValue
 
-  resolve _ DictionaryData {verb = Just verb
+  resolve _ VerbData {verb = Just verb
                             , form = Just form
-                            , mode = Just mode
                             , person = Just person}
-   = Just $ selectVerb verb form mode person
+   = Just $ selectVerb verb form person
 
   resolve _ _ = Nothing
 
-data VerbValue = VerbValue
+data VerbStructure = VerbStructure
     { vVerb :: Text
     , vForm :: Text
-    , vMode :: Text
     , vPerson :: Text
     }
     deriving (Eq, Generic, Hashable, Ord, Show, NFData)
 
-instance ToJSON VerbValue where
-    toJSON (VerbValue verb form mode person) = object $
+instance ToJSON VerbStructure where
+    toJSON (VerbStructure verb form person) = object $
       [ "lemma" .= verb
       , "form" .= form
-      , "mode" .= mode
       , "person" .= person
       ]
 
-data DictionaryValue
-  = ExportVerbValue VerbValue
+data VerbValue
+  = ExportVerbValue VerbStructure
   deriving (Eq, Ord, Show)
 
-instance ToJSON DictionaryValue where
+instance ToJSON VerbValue where
   toJSON (ExportVerbValue value) = case toJSON value of
     Object o -> Object $ o
     _ -> Object H.empty
@@ -70,14 +66,13 @@ instance ToJSON DictionaryValue where
 -- -----------------------------------------------------------------
 -- Value helpers
 
-selectVerb :: Text -> Text -> Text -> Text -> DictionaryValue
-selectVerb u f m p = ExportVerbValue $ getVerb u f m p
+selectVerb :: Text -> Text -> Text -> VerbValue
+selectVerb u f p = ExportVerbValue $ getVerb u f p
 
 -- -----------------------------------------------------------------
 -- Value build
 
-getVerb :: Text -> Text -> Text -> Text -> VerbValue
-getVerb u f m p = VerbValue {vVerb = u
+getVerb :: Text -> Text -> Text -> VerbStructure
+getVerb u f p = VerbStructure {vVerb = u
                       , vForm = f
-                      , vMode = m
                       , vPerson = p}

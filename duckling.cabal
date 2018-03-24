@@ -616,14 +616,11 @@ library
                      , Duckling.Volume.Types
 
                      -- Dictionary
-                     , Duckling.Dictionary.IT.Corpus
-                     , Duckling.Dictionary.IT.Rules
-                     , Duckling.Dictionary.Helpers
-                     , Duckling.Dictionary.Types
-
-                     -- Language
-                     , Duckling.Language.IT.H
-                     , Duckling.Language.IT.V
+                     , Duckling.Dictionary.Verb.IT.Corpus
+                     , Duckling.Dictionary.Verb.IT.Rules
+                     , Duckling.Dictionary.Verb.IT.Values
+                     , Duckling.Dictionary.Verb.Helpers
+                     , Duckling.Dictionary.Verb.Types
 
   build-depends:       base                  >= 4.8.2 && < 5.0
                      , array                 >= 0.5.1.1 && < 0.6

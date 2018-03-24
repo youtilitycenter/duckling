@@ -7,7 +7,7 @@
 
 {-# LANGUAGE GADTs #-}
 
-module Duckling.Dictionary.Helpers
+module Duckling.Dictionary.Verb.Helpers
   ( verbHelper
   ) where
 
@@ -15,15 +15,14 @@ import Data.Text (Text)
 import Prelude
 
 import Duckling.Dimensions.Types
-import Duckling.Dictionary.Types (DictionaryData(..))
+import Duckling.Dictionary.Verb.Types (VerbData(..))
 import Duckling.Types
-import qualified Duckling.Dictionary.Types as TDictionary
+import qualified Duckling.Dictionary.Verb.Types as TDictionary
 
 -- -----------------------------------------------------------------
 -- Production
 
-verbHelper :: Text -> Text -> Text -> Text -> DictionaryData
-verbHelper v f m p = DictionaryData {TDictionary.verb = Just v
+verbHelper :: Text -> Text -> Text -> VerbData
+verbHelper v f p = VerbData {TDictionary.verb = Just v
                                   , TDictionary.form = Just f
-                                  , TDictionary.mode = Just m
                                   , TDictionary.person = Just p}

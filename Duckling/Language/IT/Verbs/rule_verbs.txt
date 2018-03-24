@@ -16,7 +16,7 @@ Futuro
 
 Passato Remoto
 
-1a singolare = {desinenza}{a}ai
+1a singolare = {desinenza}{a}i
 2a singolare = {desinenza}{a}sti
 3a singolare = {desinenza}{ò}
 1a plurale = {desinenza}{a}mmo

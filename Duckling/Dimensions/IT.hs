@@ -21,5 +21,5 @@ allDimensions =
   , This Temperature
   , This Time
   , This Volume
-  , This Dictionary
+  , This Verb
   ]

@@ -8,13 +8,13 @@
 
 {-# LANGUAGE OverloadedStrings #-}
 
-module Duckling.Dictionary.IT.Corpus
+module Duckling.Dictionary.Verb.IT.Corpus
   ( corpus ) where
 
 import Prelude
 import Data.String
 
-import Duckling.Dictionary.Types
+import Duckling.Dictionary.Verb.Types
 import Duckling.Testing.Types
 
 corpus :: Corpus

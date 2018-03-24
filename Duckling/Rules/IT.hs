@@ -20,7 +20,7 @@ import Duckling.Locale
 import Duckling.Types
 import qualified Duckling.Duration.IT.Rules as Duration
 import qualified Duckling.Email.IT.Rules as Email
-import qualified Duckling.Dictionary.IT.Rules as Dictionary
+import qualified Duckling.Dictionary.Verb.IT.Rules as Verb
 import qualified Duckling.Numeral.IT.Rules as Numeral
 import qualified Duckling.Ordinal.IT.Rules as Ordinal
 import qualified Duckling.Quantity.IT.Rules as Quantity
@@ -40,7 +40,7 @@ langRules (This AmountOfMoney) = []
 langRules (This Distance) = []
 langRules (This Duration) = Duration.rules
 langRules (This Email) = Email.rules
-langRules (This Dictionary) = Dictionary.rules
+langRules (This Verb) = Verb.rules
 langRules (This Numeral) = Numeral.rules
 langRules (This Ordinal) = Ordinal.rules
 langRules (This PhoneNumber) = []
