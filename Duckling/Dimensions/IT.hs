@@ -22,4 +22,8 @@ allDimensions =
   , This Time
   , This Volume
   , This Verb
+  , This Semantic
+  , This Article
+  , This Adjective
+  , This Conjunction
   ]

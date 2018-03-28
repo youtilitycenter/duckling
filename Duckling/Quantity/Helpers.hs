@@ -11,6 +11,7 @@
 module Duckling.Quantity.Helpers
   ( isSimpleQuantity
   , quantity
+  , quantityProduct
   , unitOnly
   , withProduct
   , withUnit
@@ -43,6 +44,13 @@ quantity :: TQuantity.Unit -> Double -> QuantityData
 quantity u v = QuantityData {TQuantity.unit = Just u
                             , TQuantity.value = Just v
                             , TQuantity.aproduct = Nothing
+                            , TQuantity.minValue = Nothing
+                            , TQuantity.maxValue = Nothing}
+
+quantityProduct :: TQuantity.Unit -> Double -> Text -> QuantityData
+quantityProduct u v p = QuantityData {TQuantity.unit = Just u
+                            , TQuantity.value = Just v
+                            , TQuantity.aproduct = Just p
                             , TQuantity.minValue = Nothing
                             , TQuantity.maxValue = Nothing}
 

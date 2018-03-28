@@ -70,7 +70,6 @@ dependents (This Distance) = HashSet.singleton (This Numeral)
 dependents (This Duration) = HashSet.fromList [This Numeral, This TimeGrain]
 dependents (This Numeral) = HashSet.empty
 dependents (This Email) = HashSet.empty
-dependents (This Verb) = HashSet.empty
 dependents (This AmountOfMoney) = HashSet.singleton (This Numeral)
 dependents (This Ordinal) = HashSet.singleton (This Numeral)
 dependents (This PhoneNumber) = HashSet.empty
@@ -82,6 +81,11 @@ dependents (This Time) =
 dependents (This TimeGrain) = HashSet.empty
 dependents (This Url) = HashSet.empty
 dependents (This Volume) = HashSet.singleton (This Numeral)
+dependents (This Verb) = HashSet.empty
+dependents (This Semantic) = HashSet.empty
+dependents (This Article) = HashSet.empty
+dependents (This Adjective) = HashSet.empty
+dependents (This Conjunction) = HashSet.empty
 
 langDimensions :: Lang -> [Some Dimension]
 langDimensions AR = ARDimensions.allDimensions

@@ -17,7 +17,8 @@ module Duckling.Quantity.IT.Rules
 import Data.HashMap.Strict (HashMap)
 import Data.String
 import Data.Text (Text)
-import Prelude
+import Data.Text as T
+import Prelude as P
 import qualified Data.HashMap.Strict as HashMap
 import qualified Data.Text as Text
 
@@ -33,26 +34,27 @@ import qualified Duckling.Quantity.Types as TQuantity
 
 quantities :: [(Text, String, TQuantity.Unit)]
 quantities =
-  [ ("<quantity> giga", "((giga?)|gia|gb)", TQuantity.Giga)
+  [ ("<number> pezzi di product", "(?:pezzo|pezzi|tipi|tipo) di (\\w+)", (TQuantity.Custom "type_of_generic_product"))
+  , ("<number> product", "((?(?!pezzo|pezzi|tipi|tipo)\\w+))", (TQuantity.Custom "generic_product"))
   ]
 
 opsMap :: HashMap Text (Double -> Double)
 opsMap = HashMap.fromList
-  [ ( "milligram" , (/ 1000))
-  , ( "milligrams", (/ 1000))
-  , ( "mg"        , (/ 1000))
-  , ( "mgs"       , (/ 1000))
-  , ( "kilogram"  , (* 1000))
-  , ( "kilograms" , (* 1000))
-  , ( "kg"        , (* 1000))
-  , ( "kgs"       , (* 1000))
+  [ ( "milligrammo" , (/ 1000))
+  , ( "milligrammi" , (/ 1000))
+  , ( "mg"          , (/ 1000))
+  , ( "mgs"         , (/ 1000))
+  , ( "kilo"        , (* 1000))
+  , ( "kili"        , (* 1000))
+  , ( "kg"          , (* 1000))
+  , ( "kgs"         , (* 1000))
   ]
 
 getValue :: Text -> Double -> Double
 getValue match = HashMap.lookupDefault id (Text.toLower match) opsMap
 
 ruleNumeralQuantities :: [Rule]
-ruleNumeralQuantities = map go quantities
+ruleNumeralQuantities = P.map go quantities
   where
     go :: (Text, String, TQuantity.Unit) -> Rule
     go (name, regexPattern, u) = Rule
@@ -60,9 +62,9 @@ ruleNumeralQuantities = map go quantities
       , pattern = [Predicate isPositive, regex regexPattern]
       , prod = \case
         (Token Numeral nd:
-         Token RegexMatch (GroupMatch (match:_)):
-         _) -> Just . Token Quantity $ quantity u value
-          where value = getValue match $ TNumeral.value nd
+         Token RegexMatch (GroupMatch (product:_)):
+         _) -> Just . Token Quantity $ quantityProduct u value (T.strip product)
+          where value = getValue (T.strip product) $ TNumeral.value nd
         _ -> Nothing
       }
 

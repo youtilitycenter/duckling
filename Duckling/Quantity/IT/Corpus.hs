@@ -22,8 +22,8 @@ corpus = (testContext, allExamples)
 
 allExamples :: [Example]
 allExamples = concat
-  [ examples (simple Giga 2 Nothing)
-             [ "2 giga"
-             , "due giga"
+  [ examples (simple (Custom "mele") 2 Nothing)
+             [ "2 mele"
+             , "due mele"
              ]
   ]

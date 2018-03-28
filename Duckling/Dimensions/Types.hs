@@ -39,7 +39,6 @@ import Duckling.AmountOfMoney.Types (AmountOfMoneyData)
 import Duckling.Distance.Types (DistanceData)
 import Duckling.Duration.Types (DurationData)
 import Duckling.Email.Types (EmailData)
-import Duckling.Dictionary.Verb.Types (VerbData)
 import Duckling.Numeral.Types (NumeralData)
 import Duckling.Ordinal.Types (OrdinalData)
 import Duckling.PhoneNumber.Types (PhoneNumberData)
@@ -50,6 +49,11 @@ import Duckling.Time.Types (TimeData)
 import Duckling.TimeGrain.Types (Grain)
 import Duckling.Url.Types (UrlData)
 import Duckling.Volume.Types (VolumeData)
+import Duckling.Dictionary.Verb.Types (VerbData)
+import Duckling.Dictionary.Semantic.Types (SemanticData)
+import Duckling.Dictionary.Article.Types (ArticleData)
+import Duckling.Dictionary.Adjective.Types (AdjectiveData)
+import Duckling.Dictionary.Conjunction.Types (ConjunctionData)
 
 -- -----------------------------------------------------------------
 -- Dimension
@@ -63,7 +67,6 @@ data Dimension a where
   Distance :: Dimension DistanceData
   Duration :: Dimension DurationData
   Email :: Dimension EmailData
-  Verb :: Dimension VerbData
   Numeral :: Dimension NumeralData
   Ordinal :: Dimension OrdinalData
   PhoneNumber :: Dimension PhoneNumberData
@@ -73,6 +76,11 @@ data Dimension a where
   TimeGrain :: Dimension Grain
   Url :: Dimension UrlData
   Volume :: Dimension VolumeData
+  Verb :: Dimension VerbData
+  Semantic :: Dimension SemanticData
+  Article :: Dimension ArticleData
+  Adjective :: Dimension AdjectiveData
+  Conjunction :: Dimension ConjunctionData
 
 -- Show
 instance Show (Dimension a) where
@@ -80,7 +88,6 @@ instance Show (Dimension a) where
   show Distance = "Distance"
   show Duration = "Duration"
   show Email = "Email"
-  show Verb = "Verb"
   show AmountOfMoney = "AmountOfMoney"
   show Numeral = "Numeral"
   show Ordinal = "Ordinal"
@@ -91,6 +98,11 @@ instance Show (Dimension a) where
   show TimeGrain = "TimeGrain"
   show Url = "Url"
   show Volume = "Volume"
+  show Verb = "Verb"
+  show Semantic = "Semantic"
+  show Article = "Article"
+  show Adjective = "Adjective"
+  show Conjunction = "Conjunction"
 instance GShow Dimension where gshowsPrec = showsPrec
 
 -- TextShow
@@ -118,6 +130,10 @@ instance Hashable (Dimension a) where
   hashWithSalt s Url         = hashWithSalt s (12::Int)
   hashWithSalt s Volume      = hashWithSalt s (13::Int)
   hashWithSalt s Verb        = hashWithSalt s (14::Int)
+  hashWithSalt s Semantic    = hashWithSalt s (15::Int)
+  hashWithSalt s Article     = hashWithSalt s (16::Int)
+  hashWithSalt s Adjective   = hashWithSalt s (17::Int)
+  hashWithSalt s Conjunction = hashWithSalt s (18::Int)
 
 
 toName :: Dimension a -> Text
@@ -125,7 +141,6 @@ toName RegexMatch = "regex"
 toName Distance = "distance"
 toName Duration = "duration"
 toName Email = "email"
-toName Verb = "verb"
 toName AmountOfMoney = "amount-of-money"
 toName Numeral = "number"
 toName Ordinal = "ordinal"
@@ -136,6 +151,11 @@ toName Time = "time"
 toName TimeGrain = "time-grain"
 toName Url = "url"
 toName Volume = "volume"
+toName Verb = "verb"
+toName Semantic = "semantic"
+toName Article = "article"
+toName Adjective = "adjective"
+toName Conjunction = "conjunction"
 
 fromName :: Text -> Maybe (Some Dimension)
 fromName name = HashMap.lookup name m
@@ -145,7 +165,6 @@ fromName name = HashMap.lookup name m
       , ("distance", This Distance)
       , ("duration", This Duration)
       , ("email", This Email)
-      , ("verb", This Verb)
       , ("number", This Numeral)
       , ("ordinal", This Ordinal)
       , ("phone-number", This PhoneNumber)
@@ -154,6 +173,11 @@ fromName name = HashMap.lookup name m
       , ("time", This Time)
       , ("url", This Url)
       , ("volume", This Volume)
+      , ("verb", This Verb)
+      , ("semantic", This Semantic)
+      , ("article", This Article)
+      , ("adjective", This Adjective)
+      , ("conjunction", This Conjunction)
       ]
 
 instance GEq Dimension where
@@ -165,8 +189,6 @@ instance GEq Dimension where
   geq Duration _ = Nothing
   geq Email Email = Just Refl
   geq Email _ = Nothing
-  geq Verb Verb = Just Refl
-  geq Verb _ = Nothing
   geq AmountOfMoney AmountOfMoney = Just Refl
   geq AmountOfMoney _ = Nothing
   geq Numeral Numeral = Just Refl
@@ -187,3 +209,13 @@ instance GEq Dimension where
   geq Url _ = Nothing
   geq Volume Volume = Just Refl
   geq Volume _ = Nothing
+  geq Verb Verb = Just Refl
+  geq Verb _ = Nothing
+  geq Semantic Semantic = Just Refl
+  geq Semantic _ = Nothing
+  geq Article Article = Just Refl
+  geq Article _ = Nothing
+  geq Adjective Adjective = Just Refl
+  geq Adjective _ = Nothing
+  geq Conjunction Conjunction = Just Refl
+  geq Conjunction _ = Nothing

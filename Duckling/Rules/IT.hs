@@ -21,6 +21,10 @@ import Duckling.Types
 import qualified Duckling.Duration.IT.Rules as Duration
 import qualified Duckling.Email.IT.Rules as Email
 import qualified Duckling.Dictionary.Verb.IT.Rules as Verb
+import qualified Duckling.Dictionary.Semantic.IT.Rules as Semantic
+import qualified Duckling.Dictionary.Article.IT.Rules as Article
+import qualified Duckling.Dictionary.Adjective.IT.Rules as Adjective
+import qualified Duckling.Dictionary.Conjunction.IT.Rules as Conjunction
 import qualified Duckling.Numeral.IT.Rules as Numeral
 import qualified Duckling.Ordinal.IT.Rules as Ordinal
 import qualified Duckling.Quantity.IT.Rules as Quantity
@@ -40,7 +44,6 @@ langRules (This AmountOfMoney) = []
 langRules (This Distance) = []
 langRules (This Duration) = Duration.rules
 langRules (This Email) = Email.rules
-langRules (This Verb) = Verb.rules
 langRules (This Numeral) = Numeral.rules
 langRules (This Ordinal) = Ordinal.rules
 langRules (This PhoneNumber) = []
@@ -51,3 +54,8 @@ langRules (This Time) = Time.rules
 langRules (This TimeGrain) = TimeGrain.rules
 langRules (This Url) = []
 langRules (This Volume) = Volume.rules
+langRules (This Verb) = Verb.rules
+langRules (This Semantic) = Semantic.rules
+langRules (This Article) = Article.rules
+langRules (This Adjective) = Article.rules
+langRules (This Conjunction) = Conjunction.rules
