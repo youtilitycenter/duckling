@@ -618,7 +618,6 @@ library
                      -- Dictionary
                      , Duckling.Dictionary.Verb.IT.Corpus
                      , Duckling.Dictionary.Verb.IT.Rules
-                     , Duckling.Dictionary.Verb.IT.Values
                      , Duckling.Dictionary.Verb.Helpers
                      , Duckling.Dictionary.Verb.Types
                      , Duckling.Dictionary.Article.IT.Corpus
@@ -637,6 +636,29 @@ library
                      , Duckling.Dictionary.Semantic.IT.Rules
                      , Duckling.Dictionary.Semantic.Helpers
                      , Duckling.Dictionary.Semantic.Types
+
+                     -- Verb
+                     , Duckling.Dictionary.Verb.IT.Values.A
+                     , Duckling.Dictionary.Verb.IT.Values.B
+                     , Duckling.Dictionary.Verb.IT.Values.C
+                     , Duckling.Dictionary.Verb.IT.Values.D
+                     , Duckling.Dictionary.Verb.IT.Values.E
+                     , Duckling.Dictionary.Verb.IT.Values.F
+                     , Duckling.Dictionary.Verb.IT.Values.G
+                     , Duckling.Dictionary.Verb.IT.Values.H
+                     , Duckling.Dictionary.Verb.IT.Values.I
+                     , Duckling.Dictionary.Verb.IT.Values.L
+                     , Duckling.Dictionary.Verb.IT.Values.M
+                     , Duckling.Dictionary.Verb.IT.Values.N
+                     , Duckling.Dictionary.Verb.IT.Values.O
+                     , Duckling.Dictionary.Verb.IT.Values.P
+                     , Duckling.Dictionary.Verb.IT.Values.Q
+                     , Duckling.Dictionary.Verb.IT.Values.R
+                     , Duckling.Dictionary.Verb.IT.Values.S
+                     , Duckling.Dictionary.Verb.IT.Values.T
+                     , Duckling.Dictionary.Verb.IT.Values.U
+                     , Duckling.Dictionary.Verb.IT.Values.V
+                     , Duckling.Dictionary.Verb.IT.Values.Z
 
   build-depends:       base                  >= 4.8.2 && < 5.0
                      , array                 >= 0.5.1.1 && < 0.6

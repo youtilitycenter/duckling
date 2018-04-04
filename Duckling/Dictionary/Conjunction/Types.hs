@@ -25,20 +25,20 @@ import qualified Data.HashMap.Strict as H
 import qualified Data.Text as Text
 
 data ConjunctionData = ConjunctionData
-  { conjunction :: Maybe Text
-  , mtype :: Maybe Text
+  { conjunction :: Text
+  , mtype :: Text
   , adjective :: Maybe Text
   , group :: Text
-  , keyword :: Maybe String
+  , keyword :: String
   } deriving (Eq, Generic, Hashable, Ord, Show, NFData)
 
 instance Resolve ConjunctionData where
   type ResolvedValue ConjunctionData = ConjunctionValue
 
   resolve _ ConjunctionData { group = group
-                            , keyword = Just keyword
-                            , conjunction = Just conjunction
-                            , mtype = Just mtype
+                            , keyword = keyword
+                            , conjunction = conjunction
+                            , mtype = mtype
                             , adjective = Just adjective}
    = Just $ selectConjunction group keyword conjunction mtype adjective
 

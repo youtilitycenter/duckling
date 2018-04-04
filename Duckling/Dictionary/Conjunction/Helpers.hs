@@ -22,9 +22,9 @@ import qualified Duckling.Dictionary.Conjunction.Types as TDictionary
 -- -----------------------------------------------------------------
 -- Production
 
-conjunctionHelper :: Text -> Maybe String -> Text -> Text -> Text -> ConjunctionData
+conjunctionHelper :: Text -> String -> Text -> Text -> Text -> ConjunctionData
 conjunctionHelper g k c t a = ConjunctionData { TDictionary.group = g
                                   , TDictionary.keyword = k
-                                  , TDictionary.conjunction = Just c
-                                  , TDictionary.mtype = Just t
+                                  , TDictionary.conjunction = c
+                                  , TDictionary.mtype = t
                                   , TDictionary.adjective = Just a}

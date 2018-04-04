@@ -31,16 +31,56 @@ import Duckling.Dictionary.Verb.Types (VerbData(..))
 import qualified Duckling.Numeral.Types as TNumeral
 
 -- LANGUAGE
-import Duckling.Dictionary.Verb.IT.Values
+import Duckling.Dictionary.Verb.IT.Values.A as A
+import Duckling.Dictionary.Verb.IT.Values.B as B
+import Duckling.Dictionary.Verb.IT.Values.C as C
+import Duckling.Dictionary.Verb.IT.Values.D as D
+import Duckling.Dictionary.Verb.IT.Values.E as E
+import Duckling.Dictionary.Verb.IT.Values.F as F
+import Duckling.Dictionary.Verb.IT.Values.G as G
+import Duckling.Dictionary.Verb.IT.Values.H as H
+import Duckling.Dictionary.Verb.IT.Values.I as I
+import Duckling.Dictionary.Verb.IT.Values.L as L
+import Duckling.Dictionary.Verb.IT.Values.M as M
+import Duckling.Dictionary.Verb.IT.Values.N as N
+import Duckling.Dictionary.Verb.IT.Values.O as O
+import Duckling.Dictionary.Verb.IT.Values.P as P
+import Duckling.Dictionary.Verb.IT.Values.Q as Q
+import Duckling.Dictionary.Verb.IT.Values.R as R
+import Duckling.Dictionary.Verb.IT.Values.S as S
+import Duckling.Dictionary.Verb.IT.Values.T as T
+import Duckling.Dictionary.Verb.IT.Values.U as U
+import Duckling.Dictionary.Verb.IT.Values.V as V
+import Duckling.Dictionary.Verb.IT.Values.Z as Z
 
-verbs :: [(Text, String)]
-verbs =
+verbsValue :: [(Text, String)]
+verbsValue =
   [
   ]
-  ++ verbsValue
+  ++ A.verbs
+  ++ B.verbs
+  ++ C.verbs
+  ++ D.verbs
+  ++ E.verbs
+  ++ F.verbs
+  ++ G.verbs
+  ++ H.verbs
+  ++ I.verbs
+  ++ L.verbs
+  ++ M.verbs
+  ++ N.verbs
+  ++ O.verbs
+  ++ P.verbs
+  ++ Q.verbs
+  ++ R.verbs
+  ++ S.verbs
+  ++ T.verbs
+  ++ U.verbs
+  ++ V.verbs
+  ++ Z.verbs
 
-ruleVerbs :: [Rule]
-ruleVerbs = map go verbs
+ruleFindVerbs :: [Rule]
+ruleFindVerbs = map go verbsValue
   where
     go :: (Text, String) -> Rule
     go (lemma, regexPattern) = Rule
@@ -49,7 +89,6 @@ ruleVerbs = map go verbs
       , prod = \case
         (Token RegexMatch (GroupMatch (verb:special:final:_ )):
          _) -> case Text.toLower special of
-
            "e" -> case Text.toLower final of
              "rò" -> Just . Token Verb $ verbHelper lemma "future" "1s"
              "rai" -> Just . Token Verb $ verbHelper lemma "future" "2s"
@@ -121,10 +160,8 @@ ruleVerbs = map go verbs
         _ -> Nothing
       }
 
-
-
 rules :: [Rule]
 rules =
   [
   ]
-  ++ ruleVerbs
+  ++ ruleFindVerbs
