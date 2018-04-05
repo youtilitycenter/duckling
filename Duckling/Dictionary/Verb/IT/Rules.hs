@@ -31,56 +31,100 @@ import Duckling.Dictionary.Verb.Types (VerbData(..))
 import qualified Duckling.Numeral.Types as TNumeral
 
 -- LANGUAGE
-import Duckling.Dictionary.Verb.IT.Values.A as A
-import Duckling.Dictionary.Verb.IT.Values.B as B
-import Duckling.Dictionary.Verb.IT.Values.C as C
-import Duckling.Dictionary.Verb.IT.Values.D as D
-import Duckling.Dictionary.Verb.IT.Values.E as E
-import Duckling.Dictionary.Verb.IT.Values.F as F
-import Duckling.Dictionary.Verb.IT.Values.G as G
-import Duckling.Dictionary.Verb.IT.Values.H as H
-import Duckling.Dictionary.Verb.IT.Values.I as I
-import Duckling.Dictionary.Verb.IT.Values.L as L
-import Duckling.Dictionary.Verb.IT.Values.M as M
-import Duckling.Dictionary.Verb.IT.Values.N as N
-import Duckling.Dictionary.Verb.IT.Values.O as O
-import Duckling.Dictionary.Verb.IT.Values.P as P
-import Duckling.Dictionary.Verb.IT.Values.Q as Q
-import Duckling.Dictionary.Verb.IT.Values.R as R
-import Duckling.Dictionary.Verb.IT.Values.S as S
-import Duckling.Dictionary.Verb.IT.Values.T as T
-import Duckling.Dictionary.Verb.IT.Values.U as U
-import Duckling.Dictionary.Verb.IT.Values.V as V
-import Duckling.Dictionary.Verb.IT.Values.Z as Z
+import Duckling.Dictionary.Verb.IT.Values.Regular.A as Regular_A
+import Duckling.Dictionary.Verb.IT.Values.Regular.B as Regular_B
+import Duckling.Dictionary.Verb.IT.Values.Regular.C as Regular_C
+import Duckling.Dictionary.Verb.IT.Values.Regular.D as Regular_D
+import Duckling.Dictionary.Verb.IT.Values.Regular.E as Regular_E
+import Duckling.Dictionary.Verb.IT.Values.Regular.F as Regular_F
+import Duckling.Dictionary.Verb.IT.Values.Regular.G as Regular_G
+import Duckling.Dictionary.Verb.IT.Values.Regular.H as Regular_H
+import Duckling.Dictionary.Verb.IT.Values.Regular.I as Regular_I
+import Duckling.Dictionary.Verb.IT.Values.Regular.L as Regular_L
+import Duckling.Dictionary.Verb.IT.Values.Regular.M as Regular_M
+import Duckling.Dictionary.Verb.IT.Values.Regular.N as Regular_N
+import Duckling.Dictionary.Verb.IT.Values.Regular.O as Regular_O
+import Duckling.Dictionary.Verb.IT.Values.Regular.P as Regular_P
+import Duckling.Dictionary.Verb.IT.Values.Regular.Q as Regular_Q
+import Duckling.Dictionary.Verb.IT.Values.Regular.R as Regular_R
+import Duckling.Dictionary.Verb.IT.Values.Regular.S as Regular_S
+import Duckling.Dictionary.Verb.IT.Values.Regular.T as Regular_T
+import Duckling.Dictionary.Verb.IT.Values.Regular.U as Regular_U
+import Duckling.Dictionary.Verb.IT.Values.Regular.V as Regular_V
+import Duckling.Dictionary.Verb.IT.Values.Regular.Z as Regular_Z
 
-verbsValue :: [(Text, String)]
-verbsValue =
+import Duckling.Dictionary.Verb.IT.Values.Irregular.A as Irregular_A
+import Duckling.Dictionary.Verb.IT.Values.Irregular.B as Irregular_B
+import Duckling.Dictionary.Verb.IT.Values.Irregular.C as Irregular_C
+import Duckling.Dictionary.Verb.IT.Values.Irregular.D as Irregular_D
+import Duckling.Dictionary.Verb.IT.Values.Irregular.E as Irregular_E
+import Duckling.Dictionary.Verb.IT.Values.Irregular.F as Irregular_F
+import Duckling.Dictionary.Verb.IT.Values.Irregular.G as Irregular_G
+import Duckling.Dictionary.Verb.IT.Values.Irregular.H as Irregular_H
+import Duckling.Dictionary.Verb.IT.Values.Irregular.I as Irregular_I
+import Duckling.Dictionary.Verb.IT.Values.Irregular.L as Irregular_L
+import Duckling.Dictionary.Verb.IT.Values.Irregular.M as Irregular_M
+import Duckling.Dictionary.Verb.IT.Values.Irregular.N as Irregular_N
+import Duckling.Dictionary.Verb.IT.Values.Irregular.O as Irregular_O
+import Duckling.Dictionary.Verb.IT.Values.Irregular.P as Irregular_P
+import Duckling.Dictionary.Verb.IT.Values.Irregular.R as Irregular_R
+import Duckling.Dictionary.Verb.IT.Values.Irregular.S as Irregular_S
+import Duckling.Dictionary.Verb.IT.Values.Irregular.T as Irregular_T
+import Duckling.Dictionary.Verb.IT.Values.Irregular.U as Irregular_U
+import Duckling.Dictionary.Verb.IT.Values.Irregular.V as Irregular_V
+
+regularVerbsValue :: [(Text, String)]
+regularVerbsValue =
   [
   ]
-  ++ A.verbs
-  ++ B.verbs
-  ++ C.verbs
-  ++ D.verbs
-  ++ E.verbs
-  ++ F.verbs
-  ++ G.verbs
-  ++ H.verbs
-  ++ I.verbs
-  ++ L.verbs
-  ++ M.verbs
-  ++ N.verbs
-  ++ O.verbs
-  ++ P.verbs
-  ++ Q.verbs
-  ++ R.verbs
-  ++ S.verbs
-  ++ T.verbs
-  ++ U.verbs
-  ++ V.verbs
-  ++ Z.verbs
+  ++ Regular_A.verbs
+  ++ Regular_B.verbs
+  ++ Regular_C.verbs
+  ++ Regular_D.verbs
+  ++ Regular_E.verbs
+  ++ Regular_F.verbs
+  ++ Regular_G.verbs
+  ++ Regular_H.verbs
+  ++ Regular_I.verbs
+  ++ Regular_L.verbs
+  ++ Regular_M.verbs
+  ++ Regular_N.verbs
+  ++ Regular_O.verbs
+  ++ Regular_P.verbs
+  ++ Regular_Q.verbs
+  ++ Regular_R.verbs
+  ++ Regular_S.verbs
+  ++ Regular_T.verbs
+  ++ Regular_U.verbs
+  ++ Regular_V.verbs
+  ++ Regular_Z.verbs
 
-ruleFindVerbs :: [Rule]
-ruleFindVerbs = map go verbsValue
+irregularVerbsValue :: [(Text, String, Text, Text)]
+irregularVerbsValue =
+  [
+  ]
+  ++ Irregular_A.verbs
+  ++ Irregular_B.verbs
+  ++ Irregular_C.verbs
+  ++ Irregular_D.verbs
+  ++ Irregular_E.verbs
+  ++ Irregular_F.verbs
+  ++ Irregular_G.verbs
+  ++ Irregular_H.verbs
+  ++ Irregular_I.verbs
+  ++ Irregular_L.verbs
+  ++ Irregular_M.verbs
+  ++ Irregular_N.verbs
+  ++ Irregular_O.verbs
+  ++ Irregular_P.verbs
+  ++ Irregular_R.verbs
+  ++ Irregular_S.verbs
+  ++ Irregular_T.verbs
+  ++ Irregular_U.verbs
+  ++ Irregular_V.verbs
+
+ruleFindRegularVerbs :: [Rule]
+ruleFindRegularVerbs = map go regularVerbsValue
   where
     go :: (Text, String) -> Rule
     go (lemma, regexPattern) = Rule
@@ -160,8 +204,22 @@ ruleFindVerbs = map go verbsValue
         _ -> Nothing
       }
 
+ruleFindIrregularVerbs :: [Rule]
+ruleFindIrregularVerbs = map go irregularVerbsValue
+  where
+    go :: (Text, String, Text, Text) -> Rule
+    go (lemma, regexPattern, form, person) = Rule
+      { name = lemma
+      , pattern = [regex regexPattern]
+      , prod = \case
+        (Token RegexMatch (GroupMatch (match:_)):
+         _) -> Just . Token Verb $ verbHelper lemma form person
+        _ -> Nothing
+      }
+
 rules :: [Rule]
 rules =
   [
   ]
-  ++ ruleFindVerbs
+  ++ ruleFindRegularVerbs
+  ++ ruleFindIrregularVerbs

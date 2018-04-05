@@ -637,28 +637,49 @@ library
                      , Duckling.Dictionary.Semantic.Helpers
                      , Duckling.Dictionary.Semantic.Types
 
-                     -- Verb
-                     , Duckling.Dictionary.Verb.IT.Values.A
-                     , Duckling.Dictionary.Verb.IT.Values.B
-                     , Duckling.Dictionary.Verb.IT.Values.C
-                     , Duckling.Dictionary.Verb.IT.Values.D
-                     , Duckling.Dictionary.Verb.IT.Values.E
-                     , Duckling.Dictionary.Verb.IT.Values.F
-                     , Duckling.Dictionary.Verb.IT.Values.G
-                     , Duckling.Dictionary.Verb.IT.Values.H
-                     , Duckling.Dictionary.Verb.IT.Values.I
-                     , Duckling.Dictionary.Verb.IT.Values.L
-                     , Duckling.Dictionary.Verb.IT.Values.M
-                     , Duckling.Dictionary.Verb.IT.Values.N
-                     , Duckling.Dictionary.Verb.IT.Values.O
-                     , Duckling.Dictionary.Verb.IT.Values.P
-                     , Duckling.Dictionary.Verb.IT.Values.Q
-                     , Duckling.Dictionary.Verb.IT.Values.R
-                     , Duckling.Dictionary.Verb.IT.Values.S
-                     , Duckling.Dictionary.Verb.IT.Values.T
-                     , Duckling.Dictionary.Verb.IT.Values.U
-                     , Duckling.Dictionary.Verb.IT.Values.V
-                     , Duckling.Dictionary.Verb.IT.Values.Z
+                     -- Verb Regular
+                     , Duckling.Dictionary.Verb.IT.Values.Regular.A
+                     , Duckling.Dictionary.Verb.IT.Values.Regular.B
+                     , Duckling.Dictionary.Verb.IT.Values.Regular.C
+                     , Duckling.Dictionary.Verb.IT.Values.Regular.D
+                     , Duckling.Dictionary.Verb.IT.Values.Regular.E
+                     , Duckling.Dictionary.Verb.IT.Values.Regular.F
+                     , Duckling.Dictionary.Verb.IT.Values.Regular.G
+                     , Duckling.Dictionary.Verb.IT.Values.Regular.H
+                     , Duckling.Dictionary.Verb.IT.Values.Regular.I
+                     , Duckling.Dictionary.Verb.IT.Values.Regular.L
+                     , Duckling.Dictionary.Verb.IT.Values.Regular.M
+                     , Duckling.Dictionary.Verb.IT.Values.Regular.N
+                     , Duckling.Dictionary.Verb.IT.Values.Regular.O
+                     , Duckling.Dictionary.Verb.IT.Values.Regular.P
+                     , Duckling.Dictionary.Verb.IT.Values.Regular.Q
+                     , Duckling.Dictionary.Verb.IT.Values.Regular.R
+                     , Duckling.Dictionary.Verb.IT.Values.Regular.S
+                     , Duckling.Dictionary.Verb.IT.Values.Regular.T
+                     , Duckling.Dictionary.Verb.IT.Values.Regular.U
+                     , Duckling.Dictionary.Verb.IT.Values.Regular.V
+                     , Duckling.Dictionary.Verb.IT.Values.Regular.Z
+
+                     -- Verb Irregular
+                     , Duckling.Dictionary.Verb.IT.Values.Irregular.A
+                     , Duckling.Dictionary.Verb.IT.Values.Irregular.B
+                     , Duckling.Dictionary.Verb.IT.Values.Irregular.C
+                     , Duckling.Dictionary.Verb.IT.Values.Irregular.D
+                     , Duckling.Dictionary.Verb.IT.Values.Irregular.E
+                     , Duckling.Dictionary.Verb.IT.Values.Irregular.F
+                     , Duckling.Dictionary.Verb.IT.Values.Irregular.G
+                     , Duckling.Dictionary.Verb.IT.Values.Irregular.H
+                     , Duckling.Dictionary.Verb.IT.Values.Irregular.I
+                     , Duckling.Dictionary.Verb.IT.Values.Irregular.L
+                     , Duckling.Dictionary.Verb.IT.Values.Irregular.M
+                     , Duckling.Dictionary.Verb.IT.Values.Irregular.N
+                     , Duckling.Dictionary.Verb.IT.Values.Irregular.O
+                     , Duckling.Dictionary.Verb.IT.Values.Irregular.P
+                     , Duckling.Dictionary.Verb.IT.Values.Irregular.R
+                     , Duckling.Dictionary.Verb.IT.Values.Irregular.S
+                     , Duckling.Dictionary.Verb.IT.Values.Irregular.T
+                     , Duckling.Dictionary.Verb.IT.Values.Irregular.U
+                     , Duckling.Dictionary.Verb.IT.Values.Irregular.V
 
   build-depends:       base                  >= 4.8.2 && < 5.0
                      , array                 >= 0.5.1.1 && < 0.6
