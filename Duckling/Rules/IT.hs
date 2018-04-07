@@ -23,7 +23,7 @@ import qualified Duckling.Email.IT.Rules as Email
 import qualified Duckling.Dictionary.Verb.IT.Rules as Verb
 import qualified Duckling.Dictionary.Semantic.IT.Rules as Semantic
 import qualified Duckling.Dictionary.Article.IT.Rules as Article
-import qualified Duckling.Dictionary.Adjective.IT.Rules as Adjective
+import qualified Duckling.Dictionary.Adverb.IT.Rules as Adverb
 import qualified Duckling.Dictionary.Conjunction.IT.Rules as Conjunction
 import qualified Duckling.Numeral.IT.Rules as Numeral
 import qualified Duckling.Ordinal.IT.Rules as Ordinal
@@ -57,5 +57,5 @@ langRules (This Volume) = Volume.rules
 langRules (This Verb) = Verb.rules
 langRules (This Semantic) = Semantic.rules
 langRules (This Article) = Article.rules
-langRules (This Adjective) = Article.rules
+langRules (This Adverb) = Adverb.rules
 langRules (This Conjunction) = Conjunction.rules

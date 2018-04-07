@@ -624,10 +624,10 @@ library
                      , Duckling.Dictionary.Article.IT.Rules
                      , Duckling.Dictionary.Article.Helpers
                      , Duckling.Dictionary.Article.Types
-                     , Duckling.Dictionary.Adjective.IT.Corpus
-                     , Duckling.Dictionary.Adjective.IT.Rules
-                     , Duckling.Dictionary.Adjective.Helpers
-                     , Duckling.Dictionary.Adjective.Types
+                     , Duckling.Dictionary.Adverb.IT.Corpus
+                     , Duckling.Dictionary.Adverb.IT.Rules
+                     , Duckling.Dictionary.Adverb.Helpers
+                     , Duckling.Dictionary.Adverb.Types
                      , Duckling.Dictionary.Conjunction.IT.Corpus
                      , Duckling.Dictionary.Conjunction.IT.Rules
                      , Duckling.Dictionary.Conjunction.Helpers

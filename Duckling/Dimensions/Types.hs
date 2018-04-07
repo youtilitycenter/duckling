@@ -52,7 +52,7 @@ import Duckling.Volume.Types (VolumeData)
 import Duckling.Dictionary.Verb.Types (VerbData)
 import Duckling.Dictionary.Semantic.Types (SemanticData)
 import Duckling.Dictionary.Article.Types (ArticleData)
-import Duckling.Dictionary.Adjective.Types (AdjectiveData)
+import Duckling.Dictionary.Adverb.Types (AdverbData)
 import Duckling.Dictionary.Conjunction.Types (ConjunctionData)
 
 -- -----------------------------------------------------------------
@@ -79,7 +79,7 @@ data Dimension a where
   Verb :: Dimension VerbData
   Semantic :: Dimension SemanticData
   Article :: Dimension ArticleData
-  Adjective :: Dimension AdjectiveData
+  Adverb :: Dimension AdverbData
   Conjunction :: Dimension ConjunctionData
 
 -- Show
@@ -101,7 +101,7 @@ instance Show (Dimension a) where
   show Verb = "Verb"
   show Semantic = "Semantic"
   show Article = "Article"
-  show Adjective = "Adjective"
+  show Adverb = "Adverb"
   show Conjunction = "Conjunction"
 instance GShow Dimension where gshowsPrec = showsPrec
 
@@ -132,7 +132,7 @@ instance Hashable (Dimension a) where
   hashWithSalt s Verb        = hashWithSalt s (14::Int)
   hashWithSalt s Semantic    = hashWithSalt s (15::Int)
   hashWithSalt s Article     = hashWithSalt s (16::Int)
-  hashWithSalt s Adjective   = hashWithSalt s (17::Int)
+  hashWithSalt s Adverb   = hashWithSalt s (17::Int)
   hashWithSalt s Conjunction = hashWithSalt s (18::Int)
 
 
@@ -154,7 +154,7 @@ toName Volume = "volume"
 toName Verb = "verb"
 toName Semantic = "semantic"
 toName Article = "article"
-toName Adjective = "adjective"
+toName Adverb = "adverb"
 toName Conjunction = "conjunction"
 
 fromName :: Text -> Maybe (Some Dimension)
@@ -176,7 +176,7 @@ fromName name = HashMap.lookup name m
       , ("verb", This Verb)
       , ("semantic", This Semantic)
       , ("article", This Article)
-      , ("adjective", This Adjective)
+      , ("adverb", This Adverb)
       , ("conjunction", This Conjunction)
       ]
 
@@ -215,7 +215,7 @@ instance GEq Dimension where
   geq Semantic _ = Nothing
   geq Article Article = Just Refl
   geq Article _ = Nothing
-  geq Adjective Adjective = Just Refl
-  geq Adjective _ = Nothing
+  geq Adverb Adverb = Just Refl
+  geq Adverb _ = Nothing
   geq Conjunction Conjunction = Just Refl
   geq Conjunction _ = Nothing

@@ -12,7 +12,7 @@
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE TypeFamilies #-}
 
-module Duckling.Dictionary.Adjective.Types where
+module Duckling.Dictionary.Adverb.Types where
 
 import Control.DeepSeq
 import Data.Aeson
@@ -24,52 +24,36 @@ import Duckling.Resolve (Resolve(..))
 import qualified Data.HashMap.Strict as H
 import qualified Data.Text as Text
 
-data Adjective
-  = Il
-  | Lo
-  | L
-  | I
-  | Gli
-  | La
-  | Le
-  | Un
-  | Uno
-  | Una
-  deriving (Eq, Generic, Hashable, Ord, Show, NFData)
-
-instance ToJSON Adjective where
-  toJSON x = String . Text.toLower . Text.pack $ show x
-
-data AdjectiveData = AdjectiveData
-  { adjective :: Maybe Adjective
+data AdverbData = AdverbData
+  { adverb :: Maybe Text
   } deriving (Eq, Generic, Hashable, Ord, Show, NFData)
 
-instance ToJSON AdjectiveData where
-    toJSON (AdjectiveData adjective) = object $
-      ["value" .= adjective
+instance ToJSON AdverbData where
+    toJSON (AdverbData adverb) = object $
+      ["value" .= adverb
       ]
 
-instance Resolve AdjectiveData where
-  type ResolvedValue AdjectiveData = AdjectiveValue
+instance Resolve AdverbData where
+  type ResolvedValue AdverbData = AdverbValue
 
-  resolve _ AdjectiveData {adjective = Just adjective}
-   = Just $ simple adjective
+  resolve _ AdverbData {adverb = Just adverb}
+   = Just $ simple adverb
 
 data SingleValue = SingleValue
-    { vAdjective :: Adjective
+    { vAdverb :: Text
     }
     deriving (Eq, Generic, Hashable, Ord, Show, NFData)
 
 instance ToJSON SingleValue where
-    toJSON (SingleValue adjective) = object $
-      ["adjective" .= adjective
+    toJSON (SingleValue adverb) = object $
+      ["adverb" .= adverb
       ]
 
-data AdjectiveValue
+data AdverbValue
   = SimpleValue SingleValue
   deriving (Eq, Ord, Show)
 
-instance ToJSON AdjectiveValue where
+instance ToJSON AdverbValue where
   toJSON (SimpleValue value) = case toJSON value of
     Object o -> Object $ H.insert "type" (toJSON ("value" :: Text)) o
     _ -> Object H.empty
@@ -77,8 +61,8 @@ instance ToJSON AdjectiveValue where
 -- -----------------------------------------------------------------
 -- Value helpers
 
-simple :: Adjective -> AdjectiveValue
+simple :: Text -> AdverbValue
 simple a = SimpleValue $ single a
 
-single :: Adjective -> SingleValue
-single a = SingleValue {vAdjective = a}
+single :: Text -> SingleValue
+single a = SingleValue {vAdverb = a}

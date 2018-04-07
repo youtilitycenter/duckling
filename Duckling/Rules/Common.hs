@@ -43,5 +43,5 @@ rules (This Volume) = Volume.rules
 rules (This Verb) = []
 rules (This Semantic) = []
 rules (This Article) = []
-rules (This Adjective) = []
+rules (This Adverb) = []
 rules (This Conjunction) = []

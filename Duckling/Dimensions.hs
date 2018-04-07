@@ -84,7 +84,7 @@ dependents (This Volume) = HashSet.singleton (This Numeral)
 dependents (This Verb) = HashSet.empty
 dependents (This Semantic) = HashSet.empty
 dependents (This Article) = HashSet.empty
-dependents (This Adjective) = HashSet.empty
+dependents (This Adverb) = HashSet.empty
 dependents (This Conjunction) = HashSet.empty
 
 langDimensions :: Lang -> [Some Dimension]

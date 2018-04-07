@@ -8,17 +8,17 @@
 {-# LANGUAGE GADTs #-}
 
 
-module Duckling.Dictionary.Adjective.Helpers
-  ( adjectiveHelper
+module Duckling.Dictionary.Adverb.Helpers
+  ( adverbHelper
   ) where
 
 import Data.Text (Text)
 import Prelude
 
 import Duckling.Dimensions.Types
-import Duckling.Dictionary.Adjective.Types (AdjectiveData(..))
+import Duckling.Dictionary.Adverb.Types (AdverbData(..))
 import Duckling.Types
-import qualified Duckling.Dictionary.Adjective.Types as TAdjective
+import qualified Duckling.Dictionary.Adverb.Types as TAdverb
 
-adjectiveHelper :: TAdjective.Adjective -> AdjectiveData
-adjectiveHelper a = AdjectiveData {TAdjective.adjective = Just a}
+adverbHelper :: Text -> AdverbData
+adverbHelper a = AdverbData {TAdverb.adverb = Just a}

@@ -50,5 +50,5 @@ langRules (This Volume) = Volume.rules
 langRules (This Verb) = []
 langRules (This Semantic) = []
 langRules (This Article) = []
-langRules (This Adjective) = []
+langRules (This Adverb) = []
 langRules (This Conjunction) = []
