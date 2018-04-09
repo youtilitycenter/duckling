@@ -636,6 +636,10 @@ library
                      , Duckling.Dictionary.Semantic.IT.Rules
                      , Duckling.Dictionary.Semantic.Helpers
                      , Duckling.Dictionary.Semantic.Types
+                     , Duckling.Dictionary.Pronoun.IT.Corpus
+                     , Duckling.Dictionary.Pronoun.IT.Rules
+                     , Duckling.Dictionary.Pronoun.Helpers
+                     , Duckling.Dictionary.Pronoun.Types
 
                      -- Verb Regular
                      , Duckling.Dictionary.Verb.IT.Values.Regular.A

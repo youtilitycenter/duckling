@@ -25,6 +25,7 @@ import qualified Duckling.Dictionary.Semantic.IT.Rules as Semantic
 import qualified Duckling.Dictionary.Article.IT.Rules as Article
 import qualified Duckling.Dictionary.Adverb.IT.Rules as Adverb
 import qualified Duckling.Dictionary.Conjunction.IT.Rules as Conjunction
+import qualified Duckling.Dictionary.Pronoun.IT.Rules as Pronoun
 import qualified Duckling.Numeral.IT.Rules as Numeral
 import qualified Duckling.Ordinal.IT.Rules as Ordinal
 import qualified Duckling.Quantity.IT.Rules as Quantity
@@ -59,3 +60,4 @@ langRules (This Semantic) = Semantic.rules
 langRules (This Article) = Article.rules
 langRules (This Adverb) = Adverb.rules
 langRules (This Conjunction) = Conjunction.rules
+langRules (This Pronoun) = Pronoun.rules

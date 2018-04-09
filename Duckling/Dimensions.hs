@@ -86,6 +86,7 @@ dependents (This Semantic) = HashSet.empty
 dependents (This Article) = HashSet.empty
 dependents (This Adverb) = HashSet.empty
 dependents (This Conjunction) = HashSet.empty
+dependents (This Pronoun) = HashSet.empty
 
 langDimensions :: Lang -> [Some Dimension]
 langDimensions AR = ARDimensions.allDimensions

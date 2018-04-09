@@ -54,6 +54,7 @@ import Duckling.Dictionary.Semantic.Types (SemanticData)
 import Duckling.Dictionary.Article.Types (ArticleData)
 import Duckling.Dictionary.Adverb.Types (AdverbData)
 import Duckling.Dictionary.Conjunction.Types (ConjunctionData)
+import Duckling.Dictionary.Pronoun.Types (PronounData)
 
 -- -----------------------------------------------------------------
 -- Dimension
@@ -81,6 +82,7 @@ data Dimension a where
   Article :: Dimension ArticleData
   Adverb :: Dimension AdverbData
   Conjunction :: Dimension ConjunctionData
+  Pronoun :: Dimension PronounData
 
 -- Show
 instance Show (Dimension a) where
@@ -103,6 +105,7 @@ instance Show (Dimension a) where
   show Article = "Article"
   show Adverb = "Adverb"
   show Conjunction = "Conjunction"
+  show Pronoun = "Pronoun"
 instance GShow Dimension where gshowsPrec = showsPrec
 
 -- TextShow
@@ -132,8 +135,9 @@ instance Hashable (Dimension a) where
   hashWithSalt s Verb        = hashWithSalt s (14::Int)
   hashWithSalt s Semantic    = hashWithSalt s (15::Int)
   hashWithSalt s Article     = hashWithSalt s (16::Int)
-  hashWithSalt s Adverb   = hashWithSalt s (17::Int)
+  hashWithSalt s Adverb      = hashWithSalt s (17::Int)
   hashWithSalt s Conjunction = hashWithSalt s (18::Int)
+  hashWithSalt s Pronoun     = hashWithSalt s (18::Int)
 
 
 toName :: Dimension a -> Text
@@ -156,6 +160,7 @@ toName Semantic = "semantic"
 toName Article = "article"
 toName Adverb = "adverb"
 toName Conjunction = "conjunction"
+toName Pronoun = "pronoun"
 
 fromName :: Text -> Maybe (Some Dimension)
 fromName name = HashMap.lookup name m
@@ -178,6 +183,7 @@ fromName name = HashMap.lookup name m
       , ("article", This Article)
       , ("adverb", This Adverb)
       , ("conjunction", This Conjunction)
+      , ("pronoun", This Pronoun)
       ]
 
 instance GEq Dimension where
@@ -219,3 +225,5 @@ instance GEq Dimension where
   geq Adverb _ = Nothing
   geq Conjunction Conjunction = Just Refl
   geq Conjunction _ = Nothing
+  geq Pronoun Pronoun = Just Refl
+  geq Pronoun _ = Nothing
