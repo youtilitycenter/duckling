@@ -22,5 +22,8 @@ corpus = (testContext, allExamples)
 
 allExamples :: [Example]
 allExamples = concat
-  [
+  [ examples (simple "questa")
+             [ "questa casa"
+             , "questa strada"
+             ]
   ]

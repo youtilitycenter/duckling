@@ -27,4 +27,5 @@ allDimensions =
   , This Adverb
   , This Conjunction
   , This Pronoun
+  , This Preposition
   ]

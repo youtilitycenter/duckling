@@ -30,8 +30,8 @@ import Duckling.Numeral.Types (NumeralData (..))
 import Duckling.Dictionary.Semantic.Types (SemanticData(..))
 import qualified Duckling.Numeral.Types as TNumeral
 
-ruleSemantics :: Rule
-ruleSemantics = Rule
+ruleArticleWithSubjectSemantics :: Rule
+ruleArticleWithSubjectSemantics = Rule
   { name = "<article> subject"
   , pattern =
     [ dimension Article
@@ -39,11 +39,11 @@ ruleSemantics = Rule
     ]
   , prod = \case
     (Token Article a:Token RegexMatch (GroupMatch (subject:_)):_) ->
-      Just . Token Semantic $ semanticHelper a subject "to-implement"
+      Just . Token Semantic $ semanticArticleWithSubjectHelper a subject
     _ -> Nothing
   }
 
 rules :: [Rule]
 rules =
-  [ ruleSemantics
+  [ ruleArticleWithSubjectSemantics
   ]

@@ -8,13 +8,13 @@
 
 {-# LANGUAGE OverloadedStrings #-}
 
-module Duckling.Dictionary.Adverb.IT.Corpus
+module Duckling.Dictionary.Preposition.IT.Corpus
   ( corpus ) where
 
 import Prelude
 import Data.String
 
-import Duckling.Dictionary.Adverb.Types
+import Duckling.Dictionary.Preposition.Types
 import Duckling.Testing.Types
 
 corpus :: Corpus
@@ -22,8 +22,8 @@ corpus = (testContext, allExamples)
 
 allExamples :: [Example]
 allExamples = concat
-  [ examples (simple "esattamente")
-             [ "voglio esattamente queste mele"
-             , "esattamente quelle"
+  [ examples (simple "nella")
+             [ "nella casa"
+             , "nella strada"
              ]
   ]

@@ -26,6 +26,7 @@ import qualified Duckling.Dictionary.Article.IT.Rules as Article
 import qualified Duckling.Dictionary.Adverb.IT.Rules as Adverb
 import qualified Duckling.Dictionary.Conjunction.IT.Rules as Conjunction
 import qualified Duckling.Dictionary.Pronoun.IT.Rules as Pronoun
+import qualified Duckling.Dictionary.Preposition.IT.Rules as Preposition
 import qualified Duckling.Numeral.IT.Rules as Numeral
 import qualified Duckling.Ordinal.IT.Rules as Ordinal
 import qualified Duckling.Quantity.IT.Rules as Quantity
@@ -61,3 +62,4 @@ langRules (This Article) = Article.rules
 langRules (This Adverb) = Adverb.rules
 langRules (This Conjunction) = Conjunction.rules
 langRules (This Pronoun) = Pronoun.rules
+langRules (This Preposition) = Preposition.rules

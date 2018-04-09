@@ -22,5 +22,5 @@ corpus = (testContext, allExamples)
 
 allExamples :: [Example]
 allExamples = concat
-  [ 
+  [
   ]

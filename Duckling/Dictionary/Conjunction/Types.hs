@@ -45,16 +45,16 @@ instance Resolve ConjunctionData where
   resolve _ _ = Nothing
 
 data ConjunctionStructure = ConjunctionStructure
-    { vConjunction :: Text
+    { vGroup :: Text
+    , vKeyword :: String
+    , vConjunction :: Text
     , vMType :: Text
     , vAdjective :: Text
-    , vGroup :: Text
-    , vKeyword :: String
     }
     deriving (Eq, Generic, Hashable, Ord, Show, NFData)
 
 instance ToJSON ConjunctionStructure where
-    toJSON (ConjunctionStructure conjunction mtype adjective group keyword) = object $
+    toJSON (ConjunctionStructure group keyword conjunction mtype adjective) = object $
       [ "group" .= group
       , "keyword" .= keyword
       , "conjunction" .= conjunction

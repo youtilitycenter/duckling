@@ -35,16 +35,15 @@ instance Resolve SemanticData where
   type ResolvedValue SemanticData = SemanticValue
 
   resolve _ SemanticData {mArticle = Just article
-                            , subject = Just subject
-                            , verb = Just verb}
-   = Just $ selectSemantic article subject verb
+                            , subject = Just subject }
+   = Just $ selectSemanticArticleWithSubject article subject
 
   resolve _ _ = Nothing
 
 data SemanticStructure = SemanticStructure
     { vMArticle :: ArticleData
     , vSubject :: Text
-    , vVerb :: Text
+    , vVerb :: Maybe Text
     }
     deriving (Eq, Generic, Hashable, Ord, Show, NFData)
 
@@ -52,7 +51,7 @@ instance ToJSON SemanticStructure where
     toJSON (SemanticStructure article subject verb) = object $
       [ "article" .= article
       , "subject" .= subject
-      , "verb" .= verb
+      , "verb" .= Just verb
       ]
 
 data SemanticValue
@@ -67,13 +66,13 @@ instance ToJSON SemanticValue where
 -- -----------------------------------------------------------------
 -- Value helpers
 
-selectSemantic :: ArticleData -> Text -> Text -> SemanticValue
-selectSemantic a s v = ExportSemanticValue $ getSemantic a s v
+selectSemanticArticleWithSubject :: ArticleData -> Text -> SemanticValue
+selectSemanticArticleWithSubject a s = ExportSemanticValue $ getSemanticArticleWithSubject a s
 
 -- -----------------------------------------------------------------
 -- Value build
 
-getSemantic :: ArticleData -> Text -> Text -> SemanticStructure
-getSemantic a s v = SemanticStructure { vMArticle = a
+getSemanticArticleWithSubject :: ArticleData -> Text -> SemanticStructure
+getSemanticArticleWithSubject a s = SemanticStructure { vMArticle = a
                                     , vSubject = s
-                                    , vVerb = v}
+                                    , vVerb = Nothing}

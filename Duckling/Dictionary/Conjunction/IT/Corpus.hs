@@ -13,6 +13,7 @@ module Duckling.Dictionary.Conjunction.IT.Corpus
 
 import Prelude
 import Data.String
+import Data.Text (Text)
 
 import Duckling.Dictionary.Conjunction.Types
 import Duckling.Testing.Types
@@ -22,5 +23,5 @@ corpus = (testContext, allExamples)
 
 allExamples :: [Example]
 allExamples = concat
-  [
+  [ 
   ]

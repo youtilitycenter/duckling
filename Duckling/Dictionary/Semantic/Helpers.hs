@@ -8,7 +8,7 @@
 {-# LANGUAGE GADTs #-}
 
 module Duckling.Dictionary.Semantic.Helpers
-  ( semanticHelper
+  ( semanticArticleWithSubjectHelper
   ) where
 
 import Data.Text (Text)
@@ -23,7 +23,7 @@ import qualified Duckling.Dictionary.Semantic.Types as TSemantic
 -- -----------------------------------------------------------------
 -- Production
 
-semanticHelper :: ArticleData -> Text -> Text -> SemanticData
-semanticHelper a s v = SemanticData {TSemantic.mArticle = Just a
+semanticArticleWithSubjectHelper :: ArticleData -> Text -> SemanticData
+semanticArticleWithSubjectHelper a s = SemanticData {TSemantic.mArticle = Just a
                                   , TSemantic.subject = Just s
-                                  , TSemantic.verb = Just v}
+                                  , TSemantic.verb = Nothing}

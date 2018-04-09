@@ -55,6 +55,7 @@ import Duckling.Dictionary.Article.Types (ArticleData)
 import Duckling.Dictionary.Adverb.Types (AdverbData)
 import Duckling.Dictionary.Conjunction.Types (ConjunctionData)
 import Duckling.Dictionary.Pronoun.Types (PronounData)
+import Duckling.Dictionary.Preposition.Types (PrepositionData)
 
 -- -----------------------------------------------------------------
 -- Dimension
@@ -83,6 +84,7 @@ data Dimension a where
   Adverb :: Dimension AdverbData
   Conjunction :: Dimension ConjunctionData
   Pronoun :: Dimension PronounData
+  Preposition :: Dimension PrepositionData
 
 -- Show
 instance Show (Dimension a) where
@@ -106,6 +108,7 @@ instance Show (Dimension a) where
   show Adverb = "Adverb"
   show Conjunction = "Conjunction"
   show Pronoun = "Pronoun"
+  show Preposition = "Preposition"
 instance GShow Dimension where gshowsPrec = showsPrec
 
 -- TextShow
@@ -137,7 +140,8 @@ instance Hashable (Dimension a) where
   hashWithSalt s Article     = hashWithSalt s (16::Int)
   hashWithSalt s Adverb      = hashWithSalt s (17::Int)
   hashWithSalt s Conjunction = hashWithSalt s (18::Int)
-  hashWithSalt s Pronoun     = hashWithSalt s (18::Int)
+  hashWithSalt s Pronoun     = hashWithSalt s (19::Int)
+  hashWithSalt s Preposition = hashWithSalt s (20::Int)
 
 
 toName :: Dimension a -> Text
@@ -161,6 +165,7 @@ toName Article = "article"
 toName Adverb = "adverb"
 toName Conjunction = "conjunction"
 toName Pronoun = "pronoun"
+toName Preposition = "preposition"
 
 fromName :: Text -> Maybe (Some Dimension)
 fromName name = HashMap.lookup name m
@@ -184,6 +189,7 @@ fromName name = HashMap.lookup name m
       , ("adverb", This Adverb)
       , ("conjunction", This Conjunction)
       , ("pronoun", This Pronoun)
+      , ("preposition", This Preposition)
       ]
 
 instance GEq Dimension where
@@ -225,5 +231,5 @@ instance GEq Dimension where
   geq Adverb _ = Nothing
   geq Conjunction Conjunction = Just Refl
   geq Conjunction _ = Nothing
-  geq Pronoun Pronoun = Just Refl
-  geq Pronoun _ = Nothing
+  geq Preposition Preposition = Just Refl
+  geq Preposition _ = Nothing
