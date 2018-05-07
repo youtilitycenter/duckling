@@ -8,7 +8,8 @@
 {-# LANGUAGE GADTs #-}
 
 module Duckling.Dictionary.Semantic.Helpers
-  ( semanticArticleWithSubjectHelper
+  ( semanticHelper__NP_VP
+  , semanticHelper__NP
   ) where
 
 import Data.Text (Text)
@@ -17,13 +18,18 @@ import Prelude
 import Duckling.Dimensions.Types
 import Duckling.Dictionary.Article.Types (ArticleData(..))
 import Duckling.Dictionary.Semantic.Types (SemanticData(..))
+import Duckling.Dictionary.SemanticNP.Types (SemanticDataNP(..))
+import Duckling.Dictionary.SemanticVP.Types (SemanticDataVP(..))
 import Duckling.Types
 import qualified Duckling.Dictionary.Semantic.Types as TSemantic
 
 -- -----------------------------------------------------------------
 -- Production
 
-semanticArticleWithSubjectHelper :: ArticleData -> Text -> SemanticData
-semanticArticleWithSubjectHelper a s = SemanticData {TSemantic.mArticle = Just a
-                                  , TSemantic.subject = Just s
-                                  , TSemantic.verb = Nothing}
+semanticHelper__NP_VP :: SemanticDataNP -> SemanticDataVP -> SemanticData
+semanticHelper__NP_VP np vp = SemanticData { TSemantic.mSemanticNp = Just np
+                                    , TSemantic.mSemanticVp = Just vp }
+
+semanticHelper__NP :: SemanticDataNP -> SemanticData
+semanticHelper__NP np = SemanticData { TSemantic.mSemanticNp = Just np
+                                    , TSemantic.mSemanticVp = Nothing }

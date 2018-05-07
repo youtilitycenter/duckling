@@ -29,32 +29,31 @@ import Duckling.Types
 import Duckling.Numeral.Types (NumeralData (..))
 import Duckling.Dictionary.Article.Types (ArticleData(..))
 import qualified Duckling.Numeral.Types as TNumeral
-import qualified Duckling.Dictionary.Article.Types as TArticle
 
-articles :: [(Text, String, TArticle.Article)]
+articles :: [(Text, String)]
 articles =
-  [ ("il", "(il)", TArticle.Il)
-  , ("lo", "(lo)", TArticle.Lo)
-  , ("l'", "(l'|l)", TArticle.L)
-  , ("i", "(i)", TArticle.I)
-  , ("gli", "(gli)", TArticle.Gli)
-  , ("la", "(la)", TArticle.La)
-  , ("le", "(le)", TArticle.Le)
-  , ("un", "(un)", TArticle.Un)
-  , ("uno", "(uno)", TArticle.Uno)
-  , ("una", "(una|un')", TArticle.Una)
+  [ ("il", "(il)")
+  , ("lo", "(lo)")
+  , ("l'", "(l'|l)")
+  , ("i", "(i)")
+  , ("gli", "(gli)")
+  , ("la", "(la)")
+  , ("le", "(le)")
+  , ("un", "(un)")
+  , ("uno", "(uno)")
+  , ("una", "(una|un')")
   ]
 
 ruleNumeralQuantities :: [Rule]
 ruleNumeralQuantities = map go articles
   where
-    go :: (Text, String, TArticle.Article) -> Rule
-    go (name, regexPattern, a) = Rule
-      { name = name
+    go :: (Text, String) -> Rule
+    go (article, regexPattern) = Rule
+      { name = article
       , pattern = [regex regexPattern]
       , prod = \case
         (Token RegexMatch (GroupMatch (match:_)):
-         _) -> Just . Token Article $ articleHelper a
+         _) -> Just . Token Article $ articleHelper article
         _ -> Nothing
       }
 

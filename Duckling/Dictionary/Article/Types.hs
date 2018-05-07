@@ -24,24 +24,8 @@ import Duckling.Resolve (Resolve(..))
 import qualified Data.HashMap.Strict as H
 import qualified Data.Text as Text
 
-data Article
-  = Il
-  | Lo
-  | L
-  | I
-  | Gli
-  | La
-  | Le
-  | Un
-  | Uno
-  | Una
-  deriving (Eq, Generic, Hashable, Ord, Show, NFData)
-
-instance ToJSON Article where
-  toJSON x = String . Text.toLower . Text.pack $ show x
-
 data ArticleData = ArticleData
-  { article :: Maybe Article
+  { article :: Maybe Text
   } deriving (Eq, Generic, Hashable, Ord, Show, NFData)
 
 instance ToJSON ArticleData where
@@ -56,7 +40,7 @@ instance Resolve ArticleData where
    = Just $ simple article
 
 data SingleValue = SingleValue
-    { vArticle :: Article
+    { vArticle :: Text
     }
     deriving (Eq, Generic, Hashable, Ord, Show, NFData)
 
@@ -77,8 +61,8 @@ instance ToJSON ArticleValue where
 -- -----------------------------------------------------------------
 -- Value helpers
 
-simple :: Article -> ArticleValue
+simple :: Text -> ArticleValue
 simple a = SimpleValue $ single a
 
-single :: Article -> SingleValue
+single :: Text -> SingleValue
 single a = SingleValue {vArticle = a}

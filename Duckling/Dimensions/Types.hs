@@ -51,11 +51,15 @@ import Duckling.Url.Types (UrlData)
 import Duckling.Volume.Types (VolumeData)
 import Duckling.Dictionary.Verb.Types (VerbData)
 import Duckling.Dictionary.Semantic.Types (SemanticData)
+import Duckling.Dictionary.SemanticNP.Types (SemanticDataNP)
+import Duckling.Dictionary.SemanticVP.Types (SemanticDataVP)
+import Duckling.Dictionary.SemanticPP.Types (SemanticDataPP)
 import Duckling.Dictionary.Article.Types (ArticleData)
 import Duckling.Dictionary.Adverb.Types (AdverbData)
 import Duckling.Dictionary.Conjunction.Types (ConjunctionData)
 import Duckling.Dictionary.Pronoun.Types (PronounData)
 import Duckling.Dictionary.Preposition.Types (PrepositionData)
+import Duckling.Dictionary.Adjective.Types (AdjectiveData)
 
 -- -----------------------------------------------------------------
 -- Dimension
@@ -80,11 +84,15 @@ data Dimension a where
   Volume :: Dimension VolumeData
   Verb :: Dimension VerbData
   Semantic :: Dimension SemanticData
+  SemanticNP :: Dimension SemanticDataNP
+  SemanticVP :: Dimension SemanticDataVP
+  SemanticPP :: Dimension SemanticDataPP
   Article :: Dimension ArticleData
   Adverb :: Dimension AdverbData
   Conjunction :: Dimension ConjunctionData
   Pronoun :: Dimension PronounData
   Preposition :: Dimension PrepositionData
+  Adjective :: Dimension AdjectiveData
 
 -- Show
 instance Show (Dimension a) where
@@ -104,11 +112,15 @@ instance Show (Dimension a) where
   show Volume = "Volume"
   show Verb = "Verb"
   show Semantic = "Semantic"
+  show SemanticNP = "SemanticNP"
+  show SemanticVP = "SemanticVP"
+  show SemanticPP = "SemanticPP"
   show Article = "Article"
   show Adverb = "Adverb"
   show Conjunction = "Conjunction"
   show Pronoun = "Pronoun"
   show Preposition = "Preposition"
+  show Adjective = "Adjective"
 instance GShow Dimension where gshowsPrec = showsPrec
 
 -- TextShow
@@ -137,11 +149,15 @@ instance Hashable (Dimension a) where
   hashWithSalt s Volume      = hashWithSalt s (13::Int)
   hashWithSalt s Verb        = hashWithSalt s (14::Int)
   hashWithSalt s Semantic    = hashWithSalt s (15::Int)
-  hashWithSalt s Article     = hashWithSalt s (16::Int)
-  hashWithSalt s Adverb      = hashWithSalt s (17::Int)
-  hashWithSalt s Conjunction = hashWithSalt s (18::Int)
-  hashWithSalt s Pronoun     = hashWithSalt s (19::Int)
-  hashWithSalt s Preposition = hashWithSalt s (20::Int)
+  hashWithSalt s SemanticNP  = hashWithSalt s (16::Int)
+  hashWithSalt s SemanticVP  = hashWithSalt s (17::Int)
+  hashWithSalt s SemanticPP  = hashWithSalt s (18::Int)
+  hashWithSalt s Article     = hashWithSalt s (19::Int)
+  hashWithSalt s Adverb      = hashWithSalt s (20::Int)
+  hashWithSalt s Conjunction = hashWithSalt s (21::Int)
+  hashWithSalt s Pronoun     = hashWithSalt s (22::Int)
+  hashWithSalt s Preposition = hashWithSalt s (23::Int)
+  hashWithSalt s Adjective   = hashWithSalt s (24::Int)
 
 
 toName :: Dimension a -> Text
@@ -161,11 +177,15 @@ toName Url = "url"
 toName Volume = "volume"
 toName Verb = "verb"
 toName Semantic = "semantic"
+toName SemanticNP = "semantic_np"
+toName SemanticVP = "semantic_vp"
+toName SemanticPP = "semantic_pp"
 toName Article = "article"
 toName Adverb = "adverb"
 toName Conjunction = "conjunction"
 toName Pronoun = "pronoun"
 toName Preposition = "preposition"
+toName Adjective = "adjective"
 
 fromName :: Text -> Maybe (Some Dimension)
 fromName name = HashMap.lookup name m
@@ -185,11 +205,15 @@ fromName name = HashMap.lookup name m
       , ("volume", This Volume)
       , ("verb", This Verb)
       , ("semantic", This Semantic)
+      , ("semantic_np", This SemanticNP)
+      , ("semantic_vp", This SemanticVP)
+      , ("semantic_pp", This SemanticPP)
       , ("article", This Article)
       , ("adverb", This Adverb)
       , ("conjunction", This Conjunction)
       , ("pronoun", This Pronoun)
       , ("preposition", This Preposition)
+      , ("adjective", This Adjective)
       ]
 
 instance GEq Dimension where
@@ -225,6 +249,12 @@ instance GEq Dimension where
   geq Verb _ = Nothing
   geq Semantic Semantic = Just Refl
   geq Semantic _ = Nothing
+  geq SemanticNP SemanticNP = Just Refl
+  geq SemanticNP _ = Nothing
+  geq SemanticVP SemanticVP = Just Refl
+  geq SemanticVP _ = Nothing
+  geq SemanticPP SemanticPP = Just Refl
+  geq SemanticPP _ = Nothing
   geq Article Article = Just Refl
   geq Article _ = Nothing
   geq Adverb Adverb = Just Refl
@@ -233,3 +263,7 @@ instance GEq Dimension where
   geq Conjunction _ = Nothing
   geq Preposition Preposition = Just Refl
   geq Preposition _ = Nothing
+  geq Pronoun Pronoun = Just Refl
+  geq Pronoun _ = Nothing
+  geq Adjective Adjective = Just Refl
+  geq Adjective _ = Nothing

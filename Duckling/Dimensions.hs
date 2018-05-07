@@ -83,11 +83,15 @@ dependents (This Url) = HashSet.empty
 dependents (This Volume) = HashSet.singleton (This Numeral)
 dependents (This Verb) = HashSet.empty
 dependents (This Semantic) = HashSet.empty
+dependents (This SemanticNP) = HashSet.empty
+dependents (This SemanticVP) = HashSet.empty
+dependents (This SemanticPP) = HashSet.empty
 dependents (This Article) = HashSet.empty
 dependents (This Adverb) = HashSet.empty
 dependents (This Conjunction) = HashSet.empty
 dependents (This Pronoun) = HashSet.empty
 dependents (This Preposition) = HashSet.empty
+dependents (This Adjective) = HashSet.empty
 
 langDimensions :: Lang -> [Some Dimension]
 langDimensions AR = ARDimensions.allDimensions

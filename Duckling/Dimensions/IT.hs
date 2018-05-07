@@ -23,9 +23,13 @@ allDimensions =
   , This Volume
   , This Verb
   , This Semantic
+  , This SemanticNP
+  , This SemanticVP
+  , This SemanticPP
   , This Article
   , This Adverb
   , This Conjunction
   , This Pronoun
   , This Preposition
+  , This Adjective
   ]

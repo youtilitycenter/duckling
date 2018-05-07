@@ -37,6 +37,12 @@ data NumeralData = NumeralData
   }
   deriving (Eq, Generic, Hashable, Ord, Show, NFData)
 
+instance ToJSON NumeralData where
+  toJSON (NumeralData value grain multipliable okForAnyTime) = object
+    [ "type" .= ("value" :: Text)
+    , "value" .= value
+    ]
+
 instance Resolve NumeralData where
   type ResolvedValue NumeralData = NumeralValue
   resolve _ NumeralData {value} = Just NumeralValue {vValue = value}

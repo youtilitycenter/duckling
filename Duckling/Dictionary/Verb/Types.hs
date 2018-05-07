@@ -40,6 +40,13 @@ instance Resolve VerbData where
 
   resolve _ _ = Nothing
 
+instance ToJSON VerbData where
+    toJSON (VerbData verb form person) = object $
+      [ "lemma" .= verb
+      , "form" .= form
+      , "person" .= person
+      ]
+
 data VerbStructure = VerbStructure
     { vVerb :: Text
     , vForm :: Text

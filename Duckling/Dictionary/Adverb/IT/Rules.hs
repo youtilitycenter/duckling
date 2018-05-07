@@ -12,6 +12,8 @@
 
 module Duckling.Dictionary.Adverb.IT.Rules
   ( rules
+  , searchAdverb
+  , adverbs
   ) where
 
 import Data.HashMap.Strict (HashMap)
@@ -842,6 +844,9 @@ adverbs =
   , ("volontariamente", "(volontariamente)")
   , ("volutamente", "(volutamente)")
   ]
+
+searchAdverb :: (Eq a) => a -> [(a,b)] -> [b]
+searchAdverb x = map snd . filter ((==x).fst)
 
 ruleNumeralQuantities :: [Rule]
 ruleNumeralQuantities = map go adverbs

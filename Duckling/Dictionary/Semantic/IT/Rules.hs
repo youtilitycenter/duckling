@@ -30,20 +30,33 @@ import Duckling.Numeral.Types (NumeralData (..))
 import Duckling.Dictionary.Semantic.Types (SemanticData(..))
 import qualified Duckling.Numeral.Types as TNumeral
 
-ruleArticleWithSubjectSemantics :: Rule
-ruleArticleWithSubjectSemantics = Rule
-  { name = "<article> subject"
+rule_NP :: Rule
+rule_NP = Rule
+  { name = "<np>"
   , pattern =
-    [ dimension Article
-    , regex "(\\w+)"
+    [ dimension SemanticNP
     ]
   , prod = \case
-    (Token Article a:Token RegexMatch (GroupMatch (subject:_)):_) ->
-      Just . Token Semantic $ semanticArticleWithSubjectHelper a subject
+    (Token SemanticNP np:_) ->
+      Just . Token Semantic $ semanticHelper__NP np
+    _ -> Nothing
+  }
+
+rule_NP_VP :: Rule
+rule_NP_VP = Rule
+  { name = "<np> <vp>"
+  , pattern =
+    [ dimension SemanticNP
+    , dimension SemanticVP
+    ]
+  , prod = \case
+    (Token SemanticNP np:Token SemanticVP vp:_) ->
+      Just . Token Semantic $ semanticHelper__NP_VP np vp
     _ -> Nothing
   }
 
 rules :: [Rule]
 rules =
-  [ ruleArticleWithSubjectSemantics
+  [ rule_NP
+  , rule_NP_VP
   ]

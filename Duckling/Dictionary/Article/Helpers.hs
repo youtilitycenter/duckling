@@ -20,5 +20,5 @@ import Duckling.Dictionary.Article.Types (ArticleData(..))
 import Duckling.Types
 import qualified Duckling.Dictionary.Article.Types as TArticle
 
-articleHelper :: TArticle.Article -> ArticleData
+articleHelper :: Text -> ArticleData
 articleHelper a = ArticleData {TArticle.article = Just a}

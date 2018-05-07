@@ -24,35 +24,50 @@ import Duckling.Resolve (Resolve(..))
 import qualified Data.HashMap.Strict as H
 import qualified Data.Text as Text
 import Duckling.Dictionary.Article.Types (ArticleData(..))
+import Duckling.Dictionary.SemanticNP.Types (SemanticDataNP(..))
+import Duckling.Dictionary.SemanticVP.Types (SemanticDataVP(..))
+import Duckling.Dictionary.Verb.Types (VerbData(..))
+
+-- -----------------------------------------------------------------
+-- define Data
 
 data SemanticData = SemanticData
-  { mArticle :: Maybe ArticleData
-  , subject :: Maybe Text
-  , verb :: Maybe Text
+  { mSemanticNp :: Maybe SemanticDataNP
+  , mSemanticVp :: Maybe SemanticDataVP
   } deriving (Eq, Generic, Hashable, Ord, Show, NFData)
+
+-- -----------------------------------------------------------------
+-- resolve Data
 
 instance Resolve SemanticData where
   type ResolvedValue SemanticData = SemanticValue
 
-  resolve _ SemanticData {mArticle = Just article
-                            , subject = Just subject }
-   = Just $ selectSemanticArticleWithSubject article subject
+  resolve _ SemanticData { mSemanticNp = Just mSemanticNp
+                         , mSemanticVp = Just mSemanticVp }
+   = Just $ selectSemantic mSemanticNp mSemanticVp
 
   resolve _ _ = Nothing
 
+-- -----------------------------------------------------------------
+-- structure
+
 data SemanticStructure = SemanticStructure
-    { vMArticle :: ArticleData
-    , vSubject :: Text
-    , vVerb :: Maybe Text
+    { vMSemanticNp :: Maybe SemanticDataNP
+    , vMSemanticVp :: Maybe SemanticDataVP
     }
     deriving (Eq, Generic, Hashable, Ord, Show, NFData)
 
+-- -----------------------------------------------------------------
+-- toJSON structure
+
 instance ToJSON SemanticStructure where
-    toJSON (SemanticStructure article subject verb) = object $
-      [ "article" .= article
-      , "subject" .= subject
-      , "verb" .= Just verb
+    toJSON (SemanticStructure mSemanticNp mSemanticVp) = object $
+      [ "noun_phrase" .= mSemanticNp
+      , "verb_phrase" .= mSemanticVp
       ]
+
+-- -----------------------------------------------------------------
+-- Value
 
 data SemanticValue
   = ExportSemanticValue SemanticStructure
@@ -66,13 +81,12 @@ instance ToJSON SemanticValue where
 -- -----------------------------------------------------------------
 -- Value helpers
 
-selectSemanticArticleWithSubject :: ArticleData -> Text -> SemanticValue
-selectSemanticArticleWithSubject a s = ExportSemanticValue $ getSemanticArticleWithSubject a s
+selectSemantic :: SemanticDataNP -> SemanticDataVP -> SemanticValue
+selectSemantic np vp = ExportSemanticValue $ getSemantic np vp
 
 -- -----------------------------------------------------------------
 -- Value build
 
-getSemanticArticleWithSubject :: ArticleData -> Text -> SemanticStructure
-getSemanticArticleWithSubject a s = SemanticStructure { vMArticle = a
-                                    , vSubject = s
-                                    , vVerb = Nothing}
+getSemantic :: SemanticDataNP -> SemanticDataVP -> SemanticStructure
+getSemantic np vp = SemanticStructure { vMSemanticNp = Just np
+                                      , vMSemanticVp = Just vp }

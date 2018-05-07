@@ -22,8 +22,12 @@ import qualified Duckling.Duration.IT.Rules as Duration
 import qualified Duckling.Email.IT.Rules as Email
 import qualified Duckling.Dictionary.Verb.IT.Rules as Verb
 import qualified Duckling.Dictionary.Semantic.IT.Rules as Semantic
+import qualified Duckling.Dictionary.SemanticNP.IT.Rules as SemanticNP
+import qualified Duckling.Dictionary.SemanticVP.IT.Rules as SemanticVP
+import qualified Duckling.Dictionary.SemanticPP.IT.Rules as SemanticPP
 import qualified Duckling.Dictionary.Article.IT.Rules as Article
 import qualified Duckling.Dictionary.Adverb.IT.Rules as Adverb
+import qualified Duckling.Dictionary.Adjective.IT.Rules as Adjective
 import qualified Duckling.Dictionary.Conjunction.IT.Rules as Conjunction
 import qualified Duckling.Dictionary.Pronoun.IT.Rules as Pronoun
 import qualified Duckling.Dictionary.Preposition.IT.Rules as Preposition
@@ -58,8 +62,12 @@ langRules (This Url) = []
 langRules (This Volume) = Volume.rules
 langRules (This Verb) = Verb.rules
 langRules (This Semantic) = Semantic.rules
+langRules (This SemanticNP) = SemanticNP.rules
+langRules (This SemanticVP) = SemanticVP.rules
+langRules (This SemanticPP) = SemanticPP.rules
 langRules (This Article) = Article.rules
 langRules (This Adverb) = Adverb.rules
 langRules (This Conjunction) = Conjunction.rules
 langRules (This Pronoun) = Pronoun.rules
 langRules (This Preposition) = Preposition.rules
+langRules (This Adjective) = Adjective.rules
