@@ -12,21 +12,23 @@ module Duckling.Time.EN.Corpus
   ( corpus
   , defaultCorpus
   , negativeCorpus
+  , latentCorpus
   ) where
 
 import Data.String
 import Prelude
 
+import Duckling.Resolve
 import Duckling.Testing.Types hiding (examples)
 import Duckling.Time.Corpus
 import Duckling.Time.Types hiding (Month)
 import Duckling.TimeGrain.Types hiding (add)
 
 corpus :: Corpus
-corpus = (testContext, allExamples)
+corpus = (testContext, testOptions, allExamples)
 
 defaultCorpus :: Corpus
-defaultCorpus = (testContext, allExamples ++ custom)
+defaultCorpus = (testContext, testOptions, allExamples ++ custom)
   where
     custom = concat
       [ examples (datetime (2013, 2, 15, 0, 0, 0) Day)
@@ -69,7 +71,7 @@ defaultCorpus = (testContext, allExamples ++ custom)
       ]
 
 negativeCorpus :: NegativeCorpus
-negativeCorpus = (testContext, examples)
+negativeCorpus = (testContext, testOptions, examples)
   where
     examples =
       [ "laughing out loud"
@@ -94,6 +96,35 @@ negativeCorpus = (testContext, examples)
       , "at 650.650.6500"
       , "at 650-650-6500"
       , "two sixty a m"
+      ]
+
+latentCorpus :: Corpus
+latentCorpus = (testContext, testOptions {withLatent = True}, xs)
+  where
+    xs = concat
+      [ examples (datetime (2013, 2, 24, 0, 0, 0) Day)
+                 [ "the 24"
+                 , "On 24th"
+                 ]
+      , examples (datetime (2013, 2, 12, 7, 0, 0) Hour)
+                 [ "7"
+                 ]
+      , examples (datetimeInterval
+          ((2013, 2, 12, 4, 0, 0), (2013, 2, 12, 12, 0, 0)) Hour)
+                 [ "morning"
+                 ]
+      , examples (datetimeInterval
+          ((2013, 2, 12, 12, 0, 0), (2013, 2, 12, 19, 0, 0)) Hour)
+                 [ "afternoon"
+                 ]
+      , examples (datetimeInterval
+          ((2013, 2, 12, 18, 0, 0), (2013, 2, 13, 0, 0, 0)) Hour)
+                 [ "evening"
+                 ]
+      , examples (datetimeInterval
+          ((2013, 2, 12, 18, 0, 0), (2013, 2, 13, 0, 0, 0)) Hour)
+                 [ "night"
+                 ]
       ]
 
 allExamples :: [Example]
@@ -610,20 +641,8 @@ allExamples = concat
   , examples (datetime (1996, 6, 16, 0, 0, 0) Day)
              [ "fathers day 1996"
              ]
-  , examples (datetime (2013, 5, 27, 0, 0, 0) Day)
-             [ "memorial day"
-             , "Next Memorial Day"
-             ]
-  , examples (datetime (2012, 5, 28, 0, 0, 0) Day)
-             [ "last memorial day"
-             , "memorial day of last year"
-             ]
-  , examples (datetimeInterval ((2013, 5, 24, 18, 0, 0), (2013, 5, 28, 0, 0, 0)) Hour)
-             [ "memorial day week-end"
-             ]
   , examples (datetime (2013, 7, 4, 0, 0, 0) Day)
-             [ "independence day"
-             , "4th of July"
+             [ "4th of July"
              , "4 of july"
              ]
   , examples (datetime (2013, 9, 2, 0, 0, 0) Day)
@@ -655,12 +674,29 @@ allExamples = concat
              , "this MLK day"
              ]
   , examples (datetime (2013, 1, 21, 0, 0, 0) Day)
-             [ "last MLK day"
+             [ "last MLK Jr. day"
              , "MLK day 2013"
              ]
   , examples (datetime (2012, 1, 16, 0, 0, 0) Day)
              [ "MLK day of last year"
              , "MLK day 2012"
+             ]
+  , examples (datetime (2013, 11, 1, 0, 0, 0) Day)
+             [ "world vegan day"
+             ]
+  , examples (datetime (2013, 3, 31, 0, 0, 0) Day)
+             [ "easter"
+             , "easter 2013"
+             ]
+  , examples (datetime (2013, 4, 1, 0, 0, 0) Day)
+             [ "easter mon"
+             ]
+  , examples (datetime (2010, 4, 4, 0, 0, 0) Day)
+             [ "easter 2010"
+             , "Easter Sunday two thousand ten"
+             ]
+  , examples (datetime (2013, 4, 3, 0, 0, 0) Day)
+             [ "three days after Easter"
              ]
   , examples (datetimeInterval ((2013, 2, 12, 18, 0, 0), (2013, 2, 13, 0, 0, 0)) Hour)
              [ "this evening"

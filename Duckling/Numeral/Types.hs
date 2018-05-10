@@ -45,7 +45,7 @@ instance ToJSON NumeralData where
 
 instance Resolve NumeralData where
   type ResolvedValue NumeralData = NumeralValue
-  resolve _ NumeralData {value} = Just NumeralValue {vValue = value}
+  resolve _ _ NumeralData {value} = Just (NumeralValue {vValue = value}, False)
 
 newtype NumeralValue = NumeralValue { vValue :: Double }
   deriving (Eq, Show)
