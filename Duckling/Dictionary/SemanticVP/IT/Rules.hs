@@ -53,7 +53,7 @@ rule_VP__NN_VP = Rule
     ]
   , prod = \case
     (Token RegexMatch (GroupMatch (noun:_)):Token SemanticVP vp:_) ->
-      if null (searchAdverb noun adverbs) == False 
+      if null (searchAdverb noun adverbs) == False -- check that it is not an adverb, otherwise use rule_VP__ADV_V
         then Nothing
         else Just . Token SemanticVP $ semanticHelper_NN_VP noun vp
     _ -> Nothing
@@ -68,7 +68,7 @@ rule_VP__VP_NN = Rule
     ]
   , prod = \case
     (Token SemanticVP vp:Token RegexMatch (GroupMatch (noun:_)):_) ->
-      if null (searchAdverb noun adverbs) == False 
+      if null (searchAdverb noun adverbs) == False -- check that it is not an adverb, otherwise use rule_VP__V_ADV
         then Nothing
         else Just . Token SemanticVP $ semanticHelper_NN_VP noun vp
     _ -> Nothing

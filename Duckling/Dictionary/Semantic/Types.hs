@@ -42,11 +42,11 @@ data SemanticData = SemanticData
 instance Resolve SemanticData where
   type ResolvedValue SemanticData = SemanticValue
 
-  resolve _ SemanticData { mSemanticNp = Just mSemanticNp
+  resolve _ _ SemanticData { mSemanticNp = Just mSemanticNp
                          , mSemanticVp = Just mSemanticVp }
-   = Just $ selectSemantic mSemanticNp mSemanticVp
+   = Just (selectSemantic mSemanticNp mSemanticVp, False)
 
-  resolve _ _ = Nothing
+  resolve _ _ _ = Nothing
 
 -- -----------------------------------------------------------------
 -- structure

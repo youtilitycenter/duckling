@@ -36,8 +36,8 @@ instance ToJSON AdjectiveData where
 instance Resolve AdjectiveData where
   type ResolvedValue AdjectiveData = AdjectiveValue
 
-  resolve _ AdjectiveData {adjective = Just adjective}
-   = Just $ simple adjective
+  resolve _ _ AdjectiveData {adjective = Just adjective}
+   = Just (simple adjective, False)
 
 data SingleValue = SingleValue
     { vAdjective :: Text

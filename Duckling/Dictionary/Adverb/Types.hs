@@ -36,8 +36,8 @@ instance ToJSON AdverbData where
 instance Resolve AdverbData where
   type ResolvedValue AdverbData = AdverbValue
 
-  resolve _ AdverbData {adverb = Just adverb}
-   = Just $ simple adverb
+  resolve _ _ AdverbData {adverb = Just adverb}
+   = Just (simple adverb, False)
 
 data SingleValue = SingleValue
     { vAdverb :: Text

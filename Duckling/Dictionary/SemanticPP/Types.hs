@@ -52,17 +52,17 @@ instance ToJSON SemanticDataPP where
 instance Resolve SemanticDataPP where
   type ResolvedValue SemanticDataPP = SemanticValue
 
-  resolve _ SemanticDataPP { mIn = Just mIn
+  resolve _ _ SemanticDataPP { mIn = Just mIn
                            , dt = Just dt
                            , nn = Just nn }
-   = Just $ selectSemantic_PP__IN_NP mIn dt nn
+   = Just (selectSemantic_PP__IN_NP mIn dt nn, False)
 
-  resolve _ SemanticDataPP { mIn = Just mIn
+  resolve _ _ SemanticDataPP { mIn = Just mIn
                            , mNumber = Just mNumber
                            , nn = Just nn }
-   = Just $ selectSemantic_PP__IN_DT_NN mIn mNumber nn
+   = Just (selectSemantic_PP__IN_DT_NN mIn mNumber nn, False)
 
-  resolve _ _ = Nothing
+  resolve _ _ _ = Nothing
 
 -- -----------------------------------------------------------------
 -- structure

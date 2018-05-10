@@ -57,26 +57,26 @@ instance ToJSON SemanticDataVP where
 instance Resolve SemanticDataVP where
   type ResolvedValue SemanticDataVP = SemanticValue
 
-  resolve _ SemanticDataVP { mVerb = Just mVerb
+  resolve _ _ SemanticDataVP { mVerb = Just mVerb
                            , np = Just np }
-   = Just $ selectSemantic_Vt_NP mVerb np
+   = Just (selectSemantic_Vt_NP mVerb np, False)
 
-  resolve _ SemanticDataVP { vp = Just vp
+  resolve _ _ SemanticDataVP { vp = Just vp
                            , noun = Just noun }
-   = Just $ selectSemantic_NN_VP noun vp
+   = Just (selectSemantic_NN_VP noun vp, False)
 
-  resolve _ SemanticDataVP { mVerb = Just mVerb
+  resolve _ _ SemanticDataVP { mVerb = Just mVerb
                            , adv = Just adv }
-   = Just $ selectSemantic_V_ADV mVerb adv
+   = Just (selectSemantic_V_ADV mVerb adv, False)
 
-  resolve _ SemanticDataVP { vp = Just vp
+  resolve _ _ SemanticDataVP { vp = Just vp
                            , pp = Just pp }
-   = Just $ selectSemantic_VP_PP vp pp
+   = Just (selectSemantic_VP_PP vp pp, False)
 
-  resolve _ SemanticDataVP { mVerb = Just mVerb }
-   = Just $ selectSemantic_Vi mVerb
+  resolve _ _ SemanticDataVP { mVerb = Just mVerb }
+   = Just (selectSemantic_Vi mVerb, False)
 
-  resolve _ _ = Nothing
+  resolve _ _ _ = Nothing
 
 -- -----------------------------------------------------------------
 -- structure

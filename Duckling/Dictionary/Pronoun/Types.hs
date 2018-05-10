@@ -36,8 +36,8 @@ instance ToJSON PronounData where
 instance Resolve PronounData where
   type ResolvedValue PronounData = PronounValue
 
-  resolve _ PronounData {pronoun = Just pronoun}
-   = Just $ simple pronoun
+  resolve _ _ PronounData {pronoun = Just pronoun}
+   = Just (simple pronoun, False)
 
 data SingleValue = SingleValue
     { vPronoun :: Text

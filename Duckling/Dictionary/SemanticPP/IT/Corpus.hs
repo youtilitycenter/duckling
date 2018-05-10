@@ -11,6 +11,8 @@
 module Duckling.Dictionary.SemanticPP.IT.Corpus
   ( corpus ) where
 
+import Duckling.Locale
+import Duckling.Resolve
 import Prelude
 import Data.String
 
@@ -18,7 +20,7 @@ import Duckling.Dictionary.SemanticPP.Types
 import Duckling.Testing.Types
 
 corpus :: Corpus
-corpus = (testContext, allExamples)
+corpus = (testContext {locale = makeLocale IT Nothing}, testOptions, allExamples)
 
 allExamples :: [Example]
 allExamples = concat

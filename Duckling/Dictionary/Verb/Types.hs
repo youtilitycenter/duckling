@@ -33,12 +33,12 @@ data VerbData = VerbData
 instance Resolve VerbData where
   type ResolvedValue VerbData = VerbValue
 
-  resolve _ VerbData {verb = Just verb
+  resolve _ _ VerbData {verb = Just verb
                             , form = Just form
                             , person = Just person}
-   = Just $ selectVerb verb form person
+   = Just (selectVerb verb form person, False)
 
-  resolve _ _ = Nothing
+  resolve _ _ _ = Nothing
 
 instance ToJSON VerbData where
     toJSON (VerbData verb form person) = object $

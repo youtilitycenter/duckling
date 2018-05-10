@@ -11,6 +11,8 @@
 module Duckling.Dictionary.Conjunction.IT.Corpus
   ( corpus ) where
 
+import Duckling.Locale
+import Duckling.Resolve
 import Prelude
 import Data.String
 import Data.Text (Text)
@@ -19,9 +21,9 @@ import Duckling.Dictionary.Conjunction.Types
 import Duckling.Testing.Types
 
 corpus :: Corpus
-corpus = (testContext, allExamples)
+corpus = (testContext {locale = makeLocale IT Nothing}, testOptions, allExamples)
 
 allExamples :: [Example]
 allExamples = concat
-  [ 
+  [
   ]

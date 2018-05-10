@@ -35,14 +35,14 @@ data ConjunctionData = ConjunctionData
 instance Resolve ConjunctionData where
   type ResolvedValue ConjunctionData = ConjunctionValue
 
-  resolve _ ConjunctionData { group = group
+  resolve _ _ ConjunctionData { group = group
                             , keyword = keyword
                             , conjunction = conjunction
                             , mtype = mtype
                             , adjective = Just adjective}
-   = Just $ selectConjunction group keyword conjunction mtype adjective
+   = Just (selectConjunction group keyword conjunction mtype adjective, False)
 
-  resolve _ _ = Nothing
+  resolve _ _ _ = Nothing
 
 data ConjunctionStructure = ConjunctionStructure
     { vGroup :: Text

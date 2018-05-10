@@ -57,24 +57,24 @@ instance ToJSON SemanticDataNP where
 instance Resolve SemanticDataNP where
   type ResolvedValue SemanticDataNP = SemanticValue
 
-  resolve _ SemanticDataNP { mDt = Just mDt
+  resolve _ _ SemanticDataNP { mDt = Just mDt
                            , mNn = Just mNn
                            , mAdj = Just mAdj }
-   = Just $ selectSemantic_DT_NN_ADJ mDt mNn mAdj
+   = Just (selectSemantic_DT_NN_ADJ mDt mNn mAdj, False)
 
-  resolve _ SemanticDataNP { mDt = Just mDt
+  resolve _ _ SemanticDataNP { mDt = Just mDt
                            , mNn = Just mNn }
-   = Just $ selectSemantic_DT_NN mDt mNn
+   = Just (selectSemantic_DT_NN mDt mNn, False)
 
-  resolve _ SemanticDataNP { mNum = Just mNum
+  resolve _ _ SemanticDataNP { mNum = Just mNum
                            , mNn = Just mNn }
-   = Just $ selectSemantic_NU_NN mNum mNn
+   = Just (selectSemantic_NU_NN mNum mNn, False)
 
-  resolve _ SemanticDataNP { mNp = Just mNp
+  resolve _ _ SemanticDataNP { mNp = Just mNp
                            , mPp = Just mPp }
-   = Just $ selectSemantic_NP_PP mNp mPp
+   = Just (selectSemantic_NP_PP mNp mPp, False)
 
-  resolve _ _ = Nothing
+  resolve _ _ _ = Nothing
 
 -- -----------------------------------------------------------------
 -- structure

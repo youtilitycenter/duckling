@@ -36,8 +36,8 @@ instance ToJSON PrepositionData where
 instance Resolve PrepositionData where
   type ResolvedValue PrepositionData = PrepositionValue
 
-  resolve _ PrepositionData {preposition = Just preposition}
-   = Just $ simple preposition
+  resolve _ _ PrepositionData {preposition = Just preposition}
+   = Just (simple preposition, False)
 
 data SingleValue = SingleValue
     { vPreposition :: Text

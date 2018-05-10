@@ -36,8 +36,8 @@ instance ToJSON ArticleData where
 instance Resolve ArticleData where
   type ResolvedValue ArticleData = ArticleValue
 
-  resolve _ ArticleData {article = Just article}
-   = Just $ simple article
+  resolve _ _ ArticleData {article = Just article}
+   = Just (simple article, False)
 
 data SingleValue = SingleValue
     { vArticle :: Text
