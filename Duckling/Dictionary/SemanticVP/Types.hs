@@ -38,17 +38,19 @@ data SemanticDataVP = SemanticDataVP
   , pp :: Maybe SemanticDataPP
   , vp :: Maybe SemanticDataVP
   , adv :: Maybe AdverbData
-  , noun :: Maybe Text
+  , vpTag :: Maybe Text
+  , vpRefTag :: Maybe Text
   } deriving (Eq, Generic, Hashable, Ord, Show, NFData)
 
 instance ToJSON SemanticDataVP where
-    toJSON (SemanticDataVP mVerb np pp vp adv noun) = object $
+    toJSON (SemanticDataVP mVerb np pp vp adv vpTag vpRefTag) = object $
       [ "verb" .= mVerb
       , "noun_phrase" .= np
       , "pp" .= pp
       , "verb_phrase" .= vp
       , "adverb" .= adv
-      , "noun" .= noun
+      , "tag" .= vpTag
+      , "ref_tag" .= vpRefTag
       ]
 
 -- -----------------------------------------------------------------
@@ -58,23 +60,33 @@ instance Resolve SemanticDataVP where
   type ResolvedValue SemanticDataVP = SemanticValue
 
   resolve _ _ SemanticDataVP { mVerb = Just mVerb
-                           , np = Just np }
-   = Just (selectSemantic_Vt_NP mVerb np, False)
+                            , np = Just np
+                            , vpTag = Just vpTag
+                            , vpRefTag = Just vpRefTag }
+   = Just (selectSemantic_Vt_NP mVerb np vpTag vpRefTag, False)
 
   resolve _ _ SemanticDataVP { vp = Just vp
-                           , noun = Just noun }
-   = Just (selectSemantic_NN_VP noun vp, False)
+                           , np = Just np
+                           , vpTag = Just vpTag
+                           , vpRefTag = Just vpRefTag }
+   = Just (selectSemantic_NN_VP np vp vpTag vpRefTag, False)
 
   resolve _ _ SemanticDataVP { mVerb = Just mVerb
-                           , adv = Just adv }
-   = Just (selectSemantic_V_ADV mVerb adv, False)
+                           , adv = Just adv
+                           , vpTag = Just vpTag
+                           , vpRefTag = Just vpRefTag }
+   = Just (selectSemantic_V_ADV mVerb adv vpTag vpRefTag, False)
 
   resolve _ _ SemanticDataVP { vp = Just vp
-                           , pp = Just pp }
-   = Just (selectSemantic_VP_PP vp pp, False)
+                           , pp = Just pp
+                           , vpTag = Just vpTag
+                           , vpRefTag = Just vpRefTag }
+   = Just (selectSemantic_VP_PP vp pp vpTag vpRefTag, False)
 
-  resolve _ _ SemanticDataVP { mVerb = Just mVerb }
-   = Just (selectSemantic_Vi mVerb, False)
+  resolve _ _ SemanticDataVP { mVerb = Just mVerb
+                           , vpTag = Just vpTag
+                           , vpRefTag = Just vpRefTag }
+   = Just (selectSemantic_Vi mVerb vpTag vpRefTag, False)
 
   resolve _ _ _ = Nothing
 
@@ -87,7 +99,8 @@ data SemanticStructureVP = SemanticStructureVP
     , vPP :: Maybe SemanticDataPP
     , vVP :: Maybe SemanticDataVP
     , vAdv :: Maybe AdverbData
-    , vNoun :: Maybe Text
+    , vVpTag :: Maybe Text
+    , vVpRefTag :: Maybe Text
     }
     deriving (Eq, Generic, Hashable, Ord, Show, NFData)
 
@@ -95,13 +108,14 @@ data SemanticStructureVP = SemanticStructureVP
 -- toJSON structure
 
 instance ToJSON SemanticStructureVP where
-    toJSON (SemanticStructureVP mVerb np pp vp adv noun) = object $
+    toJSON (SemanticStructureVP mVerb np pp vp adv vpTag vpRefTag) = object $
       [ "verb" .= mVerb
       , "noun_phrase" .= np
       , "pp" .= pp
       , "verb_phrase" .= vp
       , "adverb" .= adv
-      , "noun" .= noun
+      , "tag" .= vpTag
+      , "ref_tag" .= vpRefTag
       ]
 
 -- -----------------------------------------------------------------
@@ -119,60 +133,65 @@ instance ToJSON SemanticValue where
 -- -----------------------------------------------------------------
 -- Value helpers
 
-selectSemantic_Vt_NP :: VerbData -> SemanticDataNP -> SemanticValue
-selectSemantic_Vt_NP v np = ExportSemanticValueVP $ getSemantic_Vt_NP v np
+selectSemantic_Vt_NP :: VerbData -> SemanticDataNP -> Text -> Text -> SemanticValue
+selectSemantic_Vt_NP v np vpTag vpRefTag = ExportSemanticValueVP $ getSemantic_Vt_NP v np vpTag vpRefTag
 
-selectSemantic_NN_VP :: Text -> SemanticDataVP -> SemanticValue
-selectSemantic_NN_VP noun vp = ExportSemanticValueVP $ getSemantic_NN_VP noun vp
+selectSemantic_NN_VP :: SemanticDataNP -> SemanticDataVP -> Text -> Text -> SemanticValue
+selectSemantic_NN_VP np vp vpTag vpRefTag = ExportSemanticValueVP $ getSemantic_NN_VP np vp vpTag vpRefTag
 
-selectSemantic_VP_PP :: SemanticDataVP -> SemanticDataPP -> SemanticValue
-selectSemantic_VP_PP vp pp = ExportSemanticValueVP $ getSemantic_VP_PP vp pp
+selectSemantic_VP_PP :: SemanticDataVP -> SemanticDataPP -> Text -> Text -> SemanticValue
+selectSemantic_VP_PP vp pp vpTag vpRefTag = ExportSemanticValueVP $ getSemantic_VP_PP vp pp vpTag vpRefTag
 
-selectSemantic_Vi :: VerbData -> SemanticValue
-selectSemantic_Vi v = ExportSemanticValueVP $ getSemantic_Vi v
+selectSemantic_Vi :: VerbData -> Text -> Text -> SemanticValue
+selectSemantic_Vi v vpTag vpRefTag = ExportSemanticValueVP $ getSemantic_Vi v vpTag vpRefTag
 
-selectSemantic_V_ADV :: VerbData -> AdverbData -> SemanticValue
-selectSemantic_V_ADV v adv = ExportSemanticValueVP $ getSemantic_V_ADV v adv
+selectSemantic_V_ADV :: VerbData -> AdverbData -> Text -> Text -> SemanticValue
+selectSemantic_V_ADV v adv vpTag vpRefTag = ExportSemanticValueVP $ getSemantic_V_ADV v adv vpTag vpRefTag
 
 -- -----------------------------------------------------------------
 -- Value build
 
-getSemantic_Vt_NP :: VerbData -> SemanticDataNP -> SemanticStructureVP
-getSemantic_Vt_NP v np = SemanticStructureVP { vMVerb = Just v
+getSemantic_Vt_NP :: VerbData -> SemanticDataNP -> Text -> Text -> SemanticStructureVP
+getSemantic_Vt_NP v np vpTag vpRefTag = SemanticStructureVP { vMVerb = Just v
                                        , vNP = Just np
                                        , vPP = Nothing
                                        , vVP = Nothing
                                        , vAdv = Nothing
-                                       , vNoun = Nothing }
+                                       , vVpTag = Just vpTag
+                                       , vVpRefTag = Just vpRefTag }
 
-getSemantic_NN_VP :: Text -> SemanticDataVP -> SemanticStructureVP
-getSemantic_NN_VP noun vp = SemanticStructureVP { vMVerb = Nothing
-                                      , vNP = Nothing
+getSemantic_NN_VP :: SemanticDataNP -> SemanticDataVP -> Text -> Text -> SemanticStructureVP
+getSemantic_NN_VP np vp vpTag vpRefTag = SemanticStructureVP { vMVerb = Nothing
+                                      , vNP = Just np
                                       , vPP = Nothing
                                       , vVP = Just vp
                                       , vAdv = Nothing
-                                      , vNoun = Just noun }
+                                      , vVpTag = Just vpTag
+                                      , vVpRefTag = Just vpRefTag }
 
-getSemantic_VP_PP :: SemanticDataVP -> SemanticDataPP -> SemanticStructureVP
-getSemantic_VP_PP vp pp = SemanticStructureVP { vMVerb = Nothing
+getSemantic_VP_PP :: SemanticDataVP -> SemanticDataPP -> Text -> Text -> SemanticStructureVP
+getSemantic_VP_PP vp pp vpTag vpRefTag = SemanticStructureVP { vMVerb = Nothing
                                       , vNP = Nothing
                                       , vPP = Just pp
                                       , vVP = Just vp
                                       , vAdv = Nothing
-                                      , vNoun = Nothing  }
+                                      , vVpTag = Just vpTag
+                                      , vVpRefTag = Just vpRefTag  }
 
-getSemantic_Vi :: VerbData -> SemanticStructureVP
-getSemantic_Vi v = SemanticStructureVP { vMVerb = Just v
+getSemantic_Vi :: VerbData -> Text -> Text -> SemanticStructureVP
+getSemantic_Vi v vpTag vpRefTag = SemanticStructureVP { vMVerb = Just v
                                        , vNP = Nothing
                                        , vPP = Nothing
                                        , vVP = Nothing
                                        , vAdv = Nothing
-                                       , vNoun = Nothing  }
+                                       , vVpTag = Just vpTag
+                                       , vVpRefTag = Just vpRefTag  }
 
-getSemantic_V_ADV :: VerbData -> AdverbData -> SemanticStructureVP
-getSemantic_V_ADV v adv = SemanticStructureVP { vMVerb = Just v
+getSemantic_V_ADV :: VerbData -> AdverbData -> Text -> Text -> SemanticStructureVP
+getSemantic_V_ADV v adv vpTag vpRefTag = SemanticStructureVP { vMVerb = Just v
                                       , vNP = Nothing
                                       , vPP = Nothing
                                       , vVP = Nothing
                                       , vAdv = Just adv
-                                      , vNoun = Nothing  }
+                                      , vVpTag = Just vpTag
+                                      , vVpRefTag = Just vpRefTag  }

@@ -37,15 +37,22 @@ semanticHelper_Vt_NP v np = SemanticDataVP { TSemantic.mVerb = Just v
                                   , TSemantic.pp = Nothing
                                   , TSemantic.vp = Nothing
                                   , TSemantic.adv = Nothing
-                                  , TSemantic.noun = Nothing }
+                                  , TSemantic.vpTag = (verb v)
+                                  , TSemantic.vpRefTag = Just "verb" }
 
 semanticHelper_NN_VP :: Text -> SemanticDataVP -> SemanticDataVP
 semanticHelper_NN_VP noun vp = SemanticDataVP { TSemantic.mVerb = Nothing
-                                  , TSemantic.np = Nothing
+                                  , TSemantic.np = Just SemanticDataNP { mNn = Just noun
+                                                                       , mDt = Nothing
+                                                                       , mNum = Nothing
+                                                                       , mNp = Nothing
+                                                                       , mPp = Nothing
+                                                                       , mAdj = Nothing }
                                   , TSemantic.pp = Nothing
                                   , TSemantic.vp = Just vp
                                   , TSemantic.adv = Nothing
-                                  , TSemantic.noun = Just noun }
+                                  , TSemantic.vpTag = (vpTag vp)
+                                  , TSemantic.vpRefTag = Just "verb_phrase" }
 
 semanticHelper_VP_PP :: SemanticDataVP -> SemanticDataPP -> SemanticDataVP
 semanticHelper_VP_PP vp pp = SemanticDataVP { TSemantic.mVerb = Nothing
@@ -53,7 +60,8 @@ semanticHelper_VP_PP vp pp = SemanticDataVP { TSemantic.mVerb = Nothing
                                   , TSemantic.pp = Just pp
                                   , TSemantic.vp = Just vp
                                   , TSemantic.adv = Nothing
-                                  , TSemantic.noun = Nothing }
+                                  , TSemantic.vpTag = (vpTag vp)
+                                  , TSemantic.vpRefTag = Just "verb_phrase" }
 
 semanticHelper_Vi :: VerbData -> SemanticDataVP
 semanticHelper_Vi v = SemanticDataVP { TSemantic.mVerb = Just v
@@ -61,7 +69,8 @@ semanticHelper_Vi v = SemanticDataVP { TSemantic.mVerb = Just v
                                   , TSemantic.pp = Nothing
                                   , TSemantic.vp = Nothing
                                   , TSemantic.adv = Nothing
-                                  , TSemantic.noun = Nothing }
+                                  , TSemantic.vpTag = (verb v)
+                                  , TSemantic.vpRefTag = Just "verb" }
 
 semanticHelper_V_ADV :: VerbData -> AdverbData -> SemanticDataVP
 semanticHelper_V_ADV v adv = SemanticDataVP { TSemantic.mVerb = Just v
@@ -69,4 +78,5 @@ semanticHelper_V_ADV v adv = SemanticDataVP { TSemantic.mVerb = Just v
                                   , TSemantic.pp = Nothing
                                   , TSemantic.vp = Nothing
                                   , TSemantic.adv = Just adv
-                                  , TSemantic.noun = Nothing }
+                                  , TSemantic.vpTag = (verb v)
+                                  , TSemantic.vpRefTag = Just "verb" }
