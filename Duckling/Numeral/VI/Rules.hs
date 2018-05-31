@@ -79,11 +79,11 @@ ruleDecimalWithThousandsSeparator :: Rule
 ruleDecimalWithThousandsSeparator = Rule
   { name = "decimal with thousands separator"
   , pattern =
-    [ regex "(\\d+(,\\d\\d\\d)+\\.\\d+)"
+    [ regex "(\\d+(\\.\\d\\d\\d)+,\\d+)"
     ]
   , prod = \tokens -> case tokens of
       (Token RegexMatch (GroupMatch (match:_)):_) ->
-        parseDouble (Text.replace "," Text.empty match) >>= double
+        parseDouble (Text.replace "." Text.empty match) >>= double
       _ -> Nothing
   }
 
@@ -91,10 +91,10 @@ ruleDecimalNumeral :: Rule
 ruleDecimalNumeral = Rule
   { name = "decimal number"
   , pattern =
-    [ regex "(\\d*\\.\\d+)"
+    [ regex "(\\d*,\\d+)"
     ]
   , prod = \tokens -> case tokens of
-      (Token RegexMatch (GroupMatch (match:_)):_) -> parseDecimal True match
+      (Token RegexMatch (GroupMatch (match:_)):_) -> parseDecimal False match
       _ -> Nothing
   }
 
@@ -118,7 +118,7 @@ ruleNumeralDot = Rule
   , pattern =
     [ dimension Numeral
     , regex "chấm|phẩy"
-    , numberWith TNumeral.grain isNothing
+    , Predicate $ not . hasGrain
     ]
   , prod = \tokens -> case tokens of
       (Token Numeral nd1:_:Token Numeral nd2:_) ->
@@ -130,7 +130,7 @@ ruleIntersect :: Rule
 ruleIntersect = Rule
   { name = "intersect"
   , pattern =
-    [ numberWith (fromMaybe 0 . TNumeral.grain) (>1)
+    [ Predicate hasGrain
     , Predicate $ and . sequence [not . isMultipliable, isPositive]
     ]
   , prod = \tokens -> case tokens of
@@ -275,11 +275,11 @@ ruleIntegerWithThousandsSeparator :: Rule
 ruleIntegerWithThousandsSeparator = Rule
   { name = "integer with thousands separator ,"
   , pattern =
-    [ regex "(\\d{1,3}(,\\d\\d\\d){1,5})"
+    [ regex "(\\d{1,3}(\\.\\d\\d\\d){1,5})"
     ]
   , prod = \tokens -> case tokens of
       (Token RegexMatch (GroupMatch (match:_)):
-       _) -> let fmt = Text.replace "," Text.empty match
+       _) -> let fmt = Text.replace "." Text.empty match
         in parseDouble fmt >>= double
       _ -> Nothing
   }

@@ -41,6 +41,8 @@ data Currency
   | BGN
   | BRL
   | BYN
+  | CAD
+  | CNY
   | EGP
   | EUR
   | GBP
@@ -49,6 +51,7 @@ data Currency
   | ILS
   | INR
   | IQD
+  | JMD
   | JOD
   | JPY
   | KRW
@@ -57,6 +60,7 @@ data Currency
   | MAD
   | MYR
   | NOK
+  | NZD
   | PTS
   | QAR
   | RON
@@ -64,6 +68,7 @@ data Currency
   | SAR
   | SEK
   | SGD
+  | TTD
   | USD
   | VND
   deriving (Eq, Generic, Hashable, Show, Ord, NFData)
@@ -82,6 +87,8 @@ instance ToJSON Currency where
   toJSON BGN     = "BGN"
   toJSON BRL     = "BRL"
   toJSON BYN     = "BYN"
+  toJSON CAD     = "CAD"
+  toJSON CNY     = "CNY"
   toJSON EGP     = "EGP"
   toJSON EUR     = "EUR"
   toJSON GBP     = "GBP"
@@ -90,6 +97,7 @@ instance ToJSON Currency where
   toJSON ILS     = "ILS"
   toJSON IQD     = "IQD"
   toJSON INR     = "INR"
+  toJSON JMD     = "JMD"
   toJSON JOD     = "JOD"
   toJSON JPY     = "JPY"
   toJSON KRW     = "KRW"
@@ -98,6 +106,7 @@ instance ToJSON Currency where
   toJSON MAD     = "MAD"
   toJSON MYR     = "MYR"
   toJSON NOK     = "NOK"
+  toJSON NZD     = "NZD"
   toJSON PTS     = "PTS"
   toJSON QAR     = "QAR"
   toJSON RON     = "RON"
@@ -105,6 +114,7 @@ instance ToJSON Currency where
   toJSON SAR     = "SAR"
   toJSON SEK     = "SEK"
   toJSON SGD     = "SGD"
+  toJSON TTD     = "TTD"
   toJSON USD     = "USD"
   toJSON VND     = "VND"
 
