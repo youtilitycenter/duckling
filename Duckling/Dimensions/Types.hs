@@ -6,12 +6,8 @@
 -- of patent rights can be found in the PATENTS file in the same directory.
 
 
-
-{-# LANGUAGE ExistentialQuantification #-}
-{-# LANGUAGE FlexibleInstances #-}
 {-# LANGUAGE GADTs #-}
 {-# LANGUAGE NoRebindableSyntax #-}
-{-# LANGUAGE TypeOperators #-}
 
 
 module Duckling.Dimensions.Types
@@ -22,18 +18,12 @@ module Duckling.Dimensions.Types
   , toName
   ) where
 
-import Data.GADT.Compare
-import Data.GADT.Show
-import Data.Hashable
-import qualified Data.HashMap.Strict as HashMap
 import Data.Maybe
 import Data.Some
 import Data.Text (Text)
--- Intentionally limit use of Typeable to avoid casting or typeOf usage
-import Data.Typeable ((:~:)(..))
-import TextShow (TextShow(..))
-import qualified TextShow as TS
 import Prelude
+import qualified Data.HashMap.Strict as HashMap
+import qualified Data.Text as Text
 
 import Duckling.AmountOfMoney.Types (AmountOfMoneyData)
 import Duckling.Distance.Types (DistanceData)
@@ -60,6 +50,7 @@ import Duckling.Dictionary.Conjunction.Types (ConjunctionData)
 import Duckling.Dictionary.Pronoun.Types (PronounData)
 import Duckling.Dictionary.Preposition.Types (PrepositionData)
 import Duckling.Dictionary.Adjective.Types (AdjectiveData)
+import Duckling.Types
 
 -- -----------------------------------------------------------------
 -- Dimension
@@ -186,6 +177,7 @@ toName Conjunction = "conjunction"
 toName Pronoun = "pronoun"
 toName Preposition = "preposition"
 toName Adjective = "adjective"
+toName (CustomDimension dim) = Text.pack (show dim)
 
 fromName :: Text -> Maybe (Some Dimension)
 fromName name = HashMap.lookup name m
@@ -215,55 +207,3 @@ fromName name = HashMap.lookup name m
       , ("preposition", This Preposition)
       , ("adjective", This Adjective)
       ]
-
-instance GEq Dimension where
-  geq RegexMatch RegexMatch = Just Refl
-  geq RegexMatch _ = Nothing
-  geq Distance Distance = Just Refl
-  geq Distance _ = Nothing
-  geq Duration Duration = Just Refl
-  geq Duration _ = Nothing
-  geq Email Email = Just Refl
-  geq Email _ = Nothing
-  geq AmountOfMoney AmountOfMoney = Just Refl
-  geq AmountOfMoney _ = Nothing
-  geq Numeral Numeral = Just Refl
-  geq Numeral _ = Nothing
-  geq Ordinal Ordinal = Just Refl
-  geq Ordinal _ = Nothing
-  geq PhoneNumber PhoneNumber = Just Refl
-  geq PhoneNumber _ = Nothing
-  geq Quantity Quantity = Just Refl
-  geq Quantity _ = Nothing
-  geq Temperature Temperature = Just Refl
-  geq Temperature _ = Nothing
-  geq Time Time = Just Refl
-  geq Time _ = Nothing
-  geq TimeGrain TimeGrain = Just Refl
-  geq TimeGrain _ = Nothing
-  geq Url Url = Just Refl
-  geq Url _ = Nothing
-  geq Volume Volume = Just Refl
-  geq Volume _ = Nothing
-  geq Verb Verb = Just Refl
-  geq Verb _ = Nothing
-  geq Semantic Semantic = Just Refl
-  geq Semantic _ = Nothing
-  geq SemanticNP SemanticNP = Just Refl
-  geq SemanticNP _ = Nothing
-  geq SemanticVP SemanticVP = Just Refl
-  geq SemanticVP _ = Nothing
-  geq SemanticPP SemanticPP = Just Refl
-  geq SemanticPP _ = Nothing
-  geq Article Article = Just Refl
-  geq Article _ = Nothing
-  geq Adverb Adverb = Just Refl
-  geq Adverb _ = Nothing
-  geq Conjunction Conjunction = Just Refl
-  geq Conjunction _ = Nothing
-  geq Preposition Preposition = Just Refl
-  geq Preposition _ = Nothing
-  geq Pronoun Pronoun = Just Refl
-  geq Pronoun _ = Nothing
-  geq Adjective Adjective = Just Refl
-  geq Adjective _ = Nothing

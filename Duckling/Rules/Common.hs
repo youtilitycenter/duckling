@@ -51,3 +51,4 @@ rules (This Conjunction) = []
 rules (This Pronoun) = []
 rules (This Preposition) = []
 rules (This Adjective) = []
+rules (This (CustomDimension dim)) = dimRules dim

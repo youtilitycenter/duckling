@@ -31,6 +31,7 @@ defaultRules :: Some Dimension -> [Rule]
 defaultRules = langRules
 
 localeRules :: Region -> Some Dimension -> [Rule]
+localeRules region (This (CustomDimension dim)) = dimLocaleRules region dim
 localeRules _ _ = []
 
 langRules :: Some Dimension -> [Rule]
@@ -59,3 +60,4 @@ langRules (This Conjunction) = []
 langRules (This Pronoun) = []
 langRules (This Preposition) = []
 langRules (This Adjective) = []
+langRules (This (CustomDimension dim)) = dimLangRules RU dim

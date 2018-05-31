@@ -6,9 +6,9 @@
 -- of patent rights can be found in the PATENTS file in the same directory.
 
 
-{-# LANGUAGE RecordWildCards #-}
-{-# LANGUAGE NoRebindableSyntax #-}
 {-# LANGUAGE NamedFieldPuns #-}
+{-# LANGUAGE NoRebindableSyntax #-}
+{-# LANGUAGE RecordWildCards #-}
 
 module Duckling.Api
   ( analyze
@@ -21,7 +21,6 @@ import Data.HashMap.Strict (HashMap)
 import Data.HashSet (HashSet)
 import Data.Text (Text)
 import Prelude
-import TextShow
 import qualified Data.HashMap.Strict as HashMap
 import qualified Data.HashSet as HashSet
 import qualified Data.Text as Text
